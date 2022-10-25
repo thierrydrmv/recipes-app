@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import RecipiesContext from '../context/RecipiesContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 function Header() {
   const { pageTitle, switchSearch, setSwitchSearch } = useContext(RecipiesContext);
@@ -32,14 +33,7 @@ function Header() {
       </button>
       {
         switchSearch === true
-        && <input
-          type="text"
-          placeholder="Search"
-          data-testid="search-input"
-          name="search"
-          value=""
-          onChange=""
-        />
+        && <SearchBar />
       }
     </div>
   );
