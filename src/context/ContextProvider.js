@@ -5,9 +5,16 @@ import RecipiesContext from './RecipiesContext';
 function ContextProvider({ children }) {
   const [email, setEmail] = useState('');
   const [pageTitle, setPageTitle] = useState('');
+  const [switchSearch, setSwitchSearch] = useState(false);
 
   const contextValue = useMemo(() => (
-    { email, setEmail, pageTitle, setPageTitle }), [email, pageTitle]);
+    { email,
+      setEmail,
+      pageTitle,
+      setPageTitle,
+      switchSearch,
+      setSwitchSearch,
+    }), [email, pageTitle, switchSearch]);
 
   return (
     <RecipiesContext.Provider value={ contextValue }>
