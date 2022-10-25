@@ -6,14 +6,14 @@ import ContextProvider from '../context/ContextProvider';
 
 export default function RenderWithProvider(children, route = '/') {
   const history = createMemoryHistory({ initialEntries: [route] });
-  return (
-    render(
+  return {
+    ...render(
       <Router history={ history }>
         <ContextProvider>
           { children }
         </ContextProvider>
       </Router>,
-
-    )
-  );
+    ),
+    history,
+  };
 }
