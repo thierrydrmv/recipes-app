@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useContext } from 'react';
 import RecipiesContext from '../context/RecipiesContext';
 import Header from './Header';
+import Footer from './Footer';
 
 function Meals() {
   const { pageTitle, setPageTitle } = useContext(RecipiesContext);
@@ -10,6 +11,7 @@ function Meals() {
   });
   return (
     <div>
+      <Footer />
       {pageTitle === 'Meals' && <Header />}
     </div>
   );
