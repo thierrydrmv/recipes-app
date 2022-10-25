@@ -37,7 +37,10 @@ function ContextProvider({ children }) {
     if (search.searchType === 'First letter') url += 'search.php?f=';
     url += search.searchText;
     getApi(url);
-    if (search.searchType === 'First letter') url += 'search.php?f=';
+    if (search.searchType === 'First letter'
+    && search.searchText.length > 1) {
+      return global.alert('Your search must have only 1 (one) character');
+    }
   }, [search]);
 
   console.log(meals);
