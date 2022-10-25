@@ -4,17 +4,15 @@ import RecipiesContext from '../context/RecipiesContext';
 import Header from './Header';
 import Footer from './Footer';
 
-const pathNameSize = 6;
-
-function Meals({ location }) {
-  const { setPageTitle } = useContext(RecipiesContext);
+function Meals() {
+  const { pageTitle, setPageTitle } = useContext(RecipiesContext);
   useEffect(() => {
     setPageTitle('Meals');
   });
   return (
     <div>
-      {location.pathname.length === pathNameSize && <Header />}
       <Footer />
+      {pageTitle === 'Meals' && <Header />}
     </div>
   );
 }
