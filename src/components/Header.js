@@ -9,6 +9,7 @@ function Header() {
   const { pageTitle, switchSearch, setSwitchSearch } = useContext(RecipiesContext);
 
   const handleSearch = () => {
+    console.log('click');
     setSwitchSearch(!switchSearch);
   };
 

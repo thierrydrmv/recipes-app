@@ -17,18 +17,21 @@ function Drinks() {
       history.push(redirect);
     }
   }, [history, redirect, setPageTitle, setRoute]);
+  const size = 12;
   return (
     <div>
       <Header />
       {meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-        <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
-          <p data-testid={ `${index}-card-name` }>{strDrink}</p>
-          <img
-            data-testid={ `${index}-card-img` }
-            src={ strDrinkThumb }
-            alt={ idDrink }
-          />
-        </div>
+        index < size && (
+          <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
+            <p data-testid={ `${index}-card-name` }>{strDrink}</p>
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ strDrinkThumb }
+              alt={ idDrink }
+            />
+          </div>
+        )
       ))}
       <Footer />
     </div>

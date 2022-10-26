@@ -13,6 +13,8 @@ function ContextProvider({ children }) {
   const [newUrl, setNewUrl] = useState('');
   const [redirect, setRedirect] = useState('');
   const [loading, setLoading] = useState(false);
+  const [waitApi, setWaitApi] = useState(false);
+  const [mealsEmpty, setMealsEmpty] = useState(false);
 
   const contextValue = useMemo(() => (
     { email,
@@ -39,29 +41,40 @@ function ContextProvider({ children }) {
     route, newUrl, redirect, loading]);
 
   useEffect(() => {
-    let url = route === 'meals' ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
-    if (search.searchType === 'Ingredient') url += 'filter.php?i=';
-    if (search.searchType === 'Name') url += 'search.php?s=';
-    if (search.searchType === 'First letter') url += 'search.php?f=';
-    url += search.searchText;
-    if (search.searchType === 'First letter'
-    && search.searchText.length > 1) {
-      return global.alert('Your search must have only 1 (one) character');
-    }
-    if (search) {
+    if (search?.searchType) {
+      let url = route === 'meals' ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
+      if (search.searchType === 'Ingredient') url += 'filter.php?i=';
+      if (search.searchType === 'Name') url += 'search.php?s=';
+      if (search.searchType === 'First letter') url += 'search.php?f=';
+      url += search.searchText;
+      if (search.searchType === 'First letter'
+      && search.searchText.length > 1) {
+        return global.alert('Your search must have only 1 (one) character');
+      }
       setNewUrl(url);
+      setWaitApi(true);
     }
-  }, [search, route]);
+  }, [search]);
 
+  useEffect(() => {
+    if (mealsEmpty) {
+      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+  }, [mealsEmpty]);
   useEffect(() => {
     const getApi = async (data) => {
       const ret = await fetch(data);
       const conteudo = await ret.json();
       setLoading(true);
       setMeals(conteudo);
+      if (conteudo[route] === null) {
+        setMealsEmpty(true);
+      }
     };
-    getApi(newUrl);
-  }, [newUrl]);
+    if (waitApi) {
+      getApi(newUrl);
+    }
+  }, [newUrl, waitApi]);
 
   return (
     <RecipiesContext.Provider value={ contextValue }>
