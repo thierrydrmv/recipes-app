@@ -48,7 +48,9 @@ function ContextProvider({ children }) {
     && search.searchText.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
-    setNewUrl(url);
+    if (search) {
+      setNewUrl(url);
+    }
   }, [search, route]);
 
   useEffect(() => {

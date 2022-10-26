@@ -7,7 +7,6 @@ import Footer from './Footer';
 
 function Meals() {
   const {
-    pageTitle,
     setPageTitle,
     setRoute, redirect, meals } = useContext(RecipiesContext);
   const history = useHistory();
@@ -20,7 +19,7 @@ function Meals() {
   }, [history, redirect, setPageTitle, setRoute]);
   return (
     <div>
-      {pageTitle === 'Meals' && <Header />}
+      <Header />
       {meals.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
         <div data-testid={ `${index}-recipe-card` } key={ idMeal }>
           <p data-testid={ `${index}-card-name` }>{strMeal}</p>

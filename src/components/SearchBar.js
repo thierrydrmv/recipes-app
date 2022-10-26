@@ -13,13 +13,13 @@ function SearchBar() {
   const [searchText, setsearchText] = useState('');
 
   useEffect(() => {
-    if (meals && loading && meals[route].length === 1) {
+    if (meals[route] && loading && meals[route].length === 1) {
       switch (route) {
       case 'meals':
-        setRedirect(`/${route}/:${meals.meals[0].idMeal}`);
+        setRedirect(`/${route}/${meals.meals[0].idMeal}`);
         break;
       case 'drinks':
-        setRedirect(`/${route}/:${meals.drinks[0].idDrink}`);
+        setRedirect(`/${route}/${meals.drinks[0].idDrink}`);
         break;
       default:
       }
