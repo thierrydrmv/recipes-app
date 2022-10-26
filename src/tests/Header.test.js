@@ -4,7 +4,6 @@ import { screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import RenderWithProvider from './RenderWIthProvider';
 import Meals from '../components/Meals';
-import Profile from '../components/Profile';
 
 describe('Testa o componente "Header"', () => {
   beforeEach(() => {
@@ -34,19 +33,11 @@ describe('Testa o componente "Header"', () => {
     expect(searchInput).not.toBeInTheDocument();
   });
 
-  it('Verifica se o botão "Profile" reireciona para a pagina correta.', async () => {
-    const { history } = await RenderWithProvider(<Profile />);
-
+  it('Verifica se o botão "Profile" redireciona para a pagina correta.', async () => {
     const profileBtn = screen.getByTestId('profile-top-btn');
 
-    await userEvent.click(profileBtn);
+    expect(profileBtn).toBeInTheDocument();
 
-    const { pathname } = history.location;
-
-    expect(pathname).toBe('/profile');
-
-    /* const profileTitle = screen.getByText(/profile/i);
-
-      expect(profileTitle).toBeInTheDocument(); */
+    userEvent.click(profileBtn.parentNode);
   });
 });

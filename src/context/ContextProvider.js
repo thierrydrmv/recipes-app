@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import RecipiesContext from './RecipiesContext';
 
@@ -8,6 +9,10 @@ function ContextProvider({ children }) {
   const [switchSearch, setSwitchSearch] = useState(false);
   const [meals, setMeals] = useState([]);
   const [search, setsearch] = useState({});
+  const [route, setRoute] = useState('meals');
+  const [newUrl, setNewUrl] = useState('');
+  const [redirect, setRedirect] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const contextValue = useMemo(() => (
     { email,
@@ -20,30 +25,41 @@ function ContextProvider({ children }) {
       setMeals,
       search,
       setsearch,
-    }), [email, pageTitle, switchSearch, meals, search]);
-
-  async function getApi(url) {
-    const ret = await fetch(url);
-    const conteudo = await ret.json();
-    setMeals(conteudo);
-  }
+      route,
+      setRoute,
+      newUrl,
+      redirect,
+      setRedirect,
+      loading,
+      setLoading,
+    }), [email,
+    pageTitle,
+    switchSearch,
+    meals, search,
+    route, newUrl, redirect, loading]);
 
   useEffect(() => {
-    console.log(search);
-    console.log('chamou função');
-    let url = 'https://www.themealdb.com/api/json/v1/1/';
+    let url = route === 'meals' ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
     if (search.searchType === 'Ingredient') url += 'filter.php?i=';
     if (search.searchType === 'Name') url += 'search.php?s=';
     if (search.searchType === 'First letter') url += 'search.php?f=';
     url += search.searchText;
-    getApi(url);
     if (search.searchType === 'First letter'
     && search.searchText.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
-  }, [search]);
+    setNewUrl(url);
+  }, [search, route]);
 
-  console.log(meals);
+  useEffect(() => {
+    const getApi = async (data) => {
+      const ret = await fetch(data);
+      const conteudo = await ret.json();
+      setLoading(true);
+      setMeals(conteudo);
+    };
+    getApi(newUrl);
+  }, [newUrl]);
 
   return (
     <RecipiesContext.Provider value={ contextValue }>
