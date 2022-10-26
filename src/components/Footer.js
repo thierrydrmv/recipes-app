@@ -1,16 +1,11 @@
-import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import RecipiesContext from '../context/RecipiesContext';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 
 export default function Footer() {
   const history = useHistory();
 
-  const { setRoute } = useContext(RecipiesContext);
-
   const handleClick = (pathName) => {
-    setRoute(pathName);
     history.push(`/${pathName}`);
   };
 
