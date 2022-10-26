@@ -14,14 +14,10 @@ function SearchBar() {
 
   useEffect(() => {
     if (meals[route] && loading && meals[route].length === 1) {
-      switch (route) {
-      case 'meals':
+      if (route === 'meals') {
         setRedirect(`/${route}/${meals.meals[0].idMeal}`);
-        break;
-      case 'drinks':
+      } else {
         setRedirect(`/${route}/${meals.drinks[0].idDrink}`);
-        break;
-      default:
       }
     }
     setLoading(false);
