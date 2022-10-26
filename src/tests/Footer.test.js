@@ -16,6 +16,7 @@ describe('Testes para o componente Footer', () => {
   it('Testa se há redirecionamento de pagina ao clicar no botão', () => {
     renderWithProvider(<Meals />, '/meals');
     const cocktailBtn = screen.getByTestId('drinks-bottom-btn');
+    const mealsBtn = screen.getByTestId('meals-bottom-btn');
 
     const mealsTitle = screen.getByRole('heading', { name: /meals/i });
 
@@ -26,5 +27,7 @@ describe('Testes para o componente Footer', () => {
     const drinksTitle = screen.getByTestId('page-title');
 
     expect(drinksTitle).toBeInTheDocument();
+
+    userEvent.click(mealsBtn.parentElement);
   });
 });
