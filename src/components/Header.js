@@ -24,13 +24,13 @@ function Header() {
         type="button"
         onClick={ () => { handleClick('profile'); } }
       >
-        <img data-testid="profile-top-btn" src={ profileIcon } alt="" />
+        <img data-testid="profile-top-btn" src={ profileIcon } alt="btn-profile" />
       </button>
       <button
         type="button"
         onClick={ handleSearch }
       >
-        <img data-testid="search-top-btn" src={ searchIcon } alt="" />
+        <img src={ searchIcon } data-testid="search-top-btn" alt="btn-search" />
       </button>
       {
         switchSearch === true

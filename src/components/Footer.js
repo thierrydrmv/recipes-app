@@ -10,8 +10,7 @@ export default function Footer() {
   const { setRoute } = useContext(RecipiesContext);
 
   const handleClick = (pathName) => {
-    const value = pathName === 'drinks' ? 'cocktail' : 'meals';
-    setRoute(value);
+    setRoute(pathName);
     history.push(`/${pathName}`);
   };
 
