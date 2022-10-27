@@ -5,7 +5,7 @@ import Footer from './Footer';
 import '../style/profile.css';
 
 function Profile() {
-  const user = JSON.parse(localStorage.getItem((('user'))));
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const history = useHistory();
 
@@ -34,7 +34,7 @@ function Profile() {
         alt=""
       />
       <div className="profile-items">
-        <h4 data-testid="profile-email">{user.email}</h4>
+        <h4 data-testid="profile-email">{user?.email}</h4>
         <button
           className="buttons"
           type="button"
