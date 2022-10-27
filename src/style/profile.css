@@ -1,0 +1,21 @@
+.profile-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  width: 50px;
+}
+
+.profile-items {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.buttons {
+  margin-top: 15px;
+  width: 150px;
+}
