@@ -2,10 +2,10 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import Footer from './Footer';
-import '../style/profile.css';
+//import '../style/profile.css';
 
 function Profile() {
-  const user = JSON.parse(localStorage.getItem((('user'))));
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const history = useHistory();
 
@@ -28,13 +28,13 @@ function Profile() {
         Profile
       </h1>
       <img
-        className="img"
+        
         data-testid="profile-top-btn"
         src={ profileIcon }
         alt=""
       />
       <div className="profile-items">
-        <h4 data-testid="profile-email">{user.email}</h4>
+        <h4 data-testid="profile-email">{user?.email}</h4>
         <button
           className="buttons"
           type="button"
