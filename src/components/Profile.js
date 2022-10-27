@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import Footer from './Footer';
-//import '../style/profile.css';
+import '../style/profile.css';
 
 function Profile() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -28,7 +28,7 @@ function Profile() {
         Profile
       </h1>
       <img
-        
+        className="img"
         data-testid="profile-top-btn"
         src={ profileIcon }
         alt=""
