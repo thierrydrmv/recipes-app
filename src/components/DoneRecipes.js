@@ -83,6 +83,7 @@ function DoneRecipes() {
           ))}
           <button
             type="button"
+            data-testid={ `${index}-share-button` }
             onClick={ () => {
               Compartilhar(recipe.type, recipe.id);
             } }

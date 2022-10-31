@@ -44,7 +44,14 @@ describe('Testa o componente "DoneRecipes"', () => {
   });
 
   it('Testa acionamento dos botões ', () => {
-    const btns = screen.getAllByRole('button');
-    btns.forEach((b) => b.click());
+    const btn1 = screen.getByTestId('filter-by-all-btn');
+    const btn2 = screen.getByTestId('filter-by-meal-btn');
+    const btn3 = screen.getByTestId('filter-by-drink-btn');
+    const btn4 = screen.getByTestId('0-share-button');
+
+    btn1.click();
+    btn2.click();
+    btn3.click();
+    btn4.click();
   });
 });
