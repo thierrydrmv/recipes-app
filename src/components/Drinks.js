@@ -8,20 +8,23 @@ import Footer from './Footer';
 function Drinks() {
   const { setPageTitle,
     setRoute,
-    redirect, meals } = useContext(RecipiesContext);
+    redirect, meals, setRedirect } = useContext(RecipiesContext);
+
   const history = useHistory();
   useEffect(() => {
     setPageTitle('Drinks');
     setRoute('drinks');
     if (redirect) {
       history.push(redirect);
+      setRedirect('');
     }
-  }, [history, redirect, setPageTitle, setRoute]);
+  }, [history, redirect, setPageTitle, setRoute, setRedirect]);
   const size = 12;
   return (
     <div>
       <Header />
-      {meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+      { meals.drinks?.length > 1
+      && meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
         index < size && (
           <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
             <p data-testid={ `${index}-card-name` }>{strDrink}</p>

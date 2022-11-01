@@ -7,25 +7,29 @@ import Drinks from './components/Drinks';
 import Profile from './components/Profile';
 import DoneRecipes from './components/DoneRecipes';
 import FavoriteRecipes from './components/FavoriteRecipes';
+import RecipeDetails from './components/RecipeDetails';
 
 function App() {
   return (
     <BrowserRouter>
       <Route exact path="/" component={ Login } />
-      <Route path="/meals" component={ Meals } />
-      <Route path="/drinks" component={ Drinks } />
-      <Route path="/meals/:id" render={ (props) => <Meals { ...props } /> } />
-      <Route
-        path="/drinks/:id"
-        render={ (props) => <Drinks { ...props } /> }
-      />
+      <Route exact path="/meals" component={ Meals } />
+      <Route exact path="/drinks" component={ Drinks } />
       <Route
         path="/meals/:id"
-        render={ (props) => <Meals { ...props } /> }
+        render={ (props) => <RecipeDetails { ...props } /> }
       />
       <Route
         path="/drinks/:id"
-        render={ (props) => <Drinks { ...props } /> }
+        render={ (props) => <RecipeDetails { ...props } /> }
+      />
+      <Route
+        path="/meals/:id/in-progress"
+        render={ (props) => <RecipeDetails { ...props } /> }
+      />
+      <Route
+        path="/drinks/:id/in-progress"
+        render={ (props) => <RecipeDetails { ...props } /> }
       />
       <Route path="/profile" component={ Profile } />
       <Route path="/done-recipes" component={ DoneRecipes } />
