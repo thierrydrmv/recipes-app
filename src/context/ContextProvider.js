@@ -15,6 +15,10 @@ function ContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [waitApi, setWaitApi] = useState(false);
   const [mealsEmpty, setMealsEmpty] = useState(false);
+  const [idRecipeDetails, setIdRecipeDetails] = useState();
+  const [renderOneFood, setRenderOneFood] = useState([]);
+  const [cocktailApi, setCocktailApi] = useState([]);
+  const [mealApi, setMealApi] = useState([]);
 
   const contextValue = useMemo(() => (
     { email,
@@ -34,11 +38,21 @@ function ContextProvider({ children }) {
       setRedirect,
       loading,
       setLoading,
+      idRecipeDetails,
+      setIdRecipeDetails,
+      renderOneFood,
+      setRenderOneFood,
+      mealApi,
+      setMealApi,
+      cocktailApi,
+      setCocktailApi,
     }), [email,
     pageTitle,
     switchSearch,
     meals, search,
-    route, newUrl, redirect, loading]);
+    route, newUrl,
+    redirect, loading,
+    idRecipeDetails, renderOneFood, mealApi, cocktailApi]);
 
   useEffect(() => {
     if (search?.searchType) {

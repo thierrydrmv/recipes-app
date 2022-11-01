@@ -8,20 +8,28 @@ import Footer from './Footer';
 function Meals() {
   const {
     setPageTitle,
-    setRoute, redirect, meals } = useContext(RecipiesContext);
+    setRoute, redirect,
+    meals, setRedirect } = useContext(RecipiesContext);
   const history = useHistory();
+
+  useEffect(() => {
+    if (redirect) {
+      history.push(redirect);
+      setRedirect('');
+    }
+  });
+
   useEffect(() => {
     setPageTitle('Meals');
     setRoute('meals');
-    if (redirect) {
-      history.push(redirect);
-    }
-  }, [history, redirect, setPageTitle, setRoute]);
+  }, [setPageTitle, setRoute]);
+
   const size = 12;
   return (
     <div>
       <Header />
-      {meals.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
+      { meals.meals?.length > 1
+      && meals.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
         index < size && (
           <div data-testid={ `${index}-recipe-card` } key={ idMeal }>
             <p data-testid={ `${index}-card-name` }>{strMeal}</p>

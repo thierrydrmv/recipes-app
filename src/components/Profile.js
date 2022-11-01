@@ -34,7 +34,7 @@ function Profile() {
         alt=""
       />
       <div className="profile-items">
-        <h4 data-testid="profile-email">{user.email}</h4>
+        <h4 data-testid="profile-email">{user?.email}</h4>
         <button
           className="buttons"
           type="button"
