@@ -5,7 +5,7 @@ import Footer from './Footer';
 import '../style/profile.css';
 
 function Profile() {
-  const user = JSON.parse(localStorage.getItem((('user'))));
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const history = useHistory();
 
