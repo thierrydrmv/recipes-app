@@ -41,7 +41,7 @@ function DoneRecipes() {
       >
         Drinks
       </button>
-      {doneRecipes.filter(
+      {doneRecipes?.filter(
         (recipes) => (recipes.type === filtro || filtro === 'All'),
       ).map((recipe, index) => (
         <div key={ index }>

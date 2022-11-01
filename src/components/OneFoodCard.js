@@ -27,7 +27,7 @@ function OneFoodCard() {
   }, []);
   return (
     <div>
-      {renderOneFood.map(({
+      {renderOneFood?.map(({
         idMeal, strMealThumb, strMeal, strInstructions, strCategory, strYoutube,
         strTags, ingredientAndMeasureList,
       }) => (
