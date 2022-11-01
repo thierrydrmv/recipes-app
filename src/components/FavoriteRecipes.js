@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import copy from 'clipboard-copy';
 import profileIcon from '../images/profileIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
@@ -42,24 +43,10 @@ function FavoriteRecipes() {
     setUpdateLocalStorage(!updateLocalStorage);
   };
 
-  /* const copyToClipboard = ({ target }) => {
-    copy(`http://localhost:3000/${target.name}/${target.id}`)
-    .then(() => alert("Link copied!"));
-
-    setTimeout(() => {
-      setCopied(false);
-    }, 3000);
-  }; */
-
   const copyToClipboard = async ({ target }) => {
     const recipeUrl = `http://localhost:3000/${target.name}s/${target.id}`;
-    await navigator.clipboard
-      .writeText(recipeUrl)
-      ?.then(() => {
-        setId(target.id);
-      });
-    /* const threeSeconds = 5000;
-    setTimeout(() => setLinkCopied(false), threeSeconds); */
+    copy(recipeUrl);
+    setId(target.id);
   };
 
   return (

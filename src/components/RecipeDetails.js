@@ -31,16 +31,6 @@ function RecipeDetails() {
   });
 
   useEffect(() => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify({
-      drinks: {
-        178319: '[lista - de - ingredientes - utilizados]',
-      },
-      meals: {
-        52771: '[lista - de - ingredientes - utilizados]',
-      } }));
-  }, []);
-
-  useEffect(() => {
     const id = history.location.pathname.split('/')[2];
     const route = history.location.pathname.split('/')[1];
     if (renderOneFood?.length) {
