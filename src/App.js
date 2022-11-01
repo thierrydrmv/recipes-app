@@ -14,17 +14,17 @@ function App() {
       <Route exact path="/" component={ Login } />
       <Route path="/meals" component={ Meals } />
       <Route path="/drinks" component={ Drinks } />
-      <Route path="/meals/:id-da-receita" render={ (props) => <Meals { ...props } /> } />
+      <Route path="/meals/:id" render={ (props) => <Meals { ...props } /> } />
       <Route
-        path="/drinks/:id-da-receita"
+        path="/drinks/:id"
         render={ (props) => <Drinks { ...props } /> }
       />
       <Route
-        path="/meals/:id-da-receita/in-progress"
+        path="/meals/:id"
         render={ (props) => <Meals { ...props } /> }
       />
       <Route
-        path="/drinks/:id-da-receita/in-progress"
+        path="/drinks/:id"
         render={ (props) => <Drinks { ...props } /> }
       />
       <Route path="/profile" component={ Profile } />
