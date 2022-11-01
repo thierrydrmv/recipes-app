@@ -7,7 +7,7 @@ import ContextProvider from './context/ContextProvider';
 // -----------------------------------------------------------------------------------
 // setando manual valor do localstore para desenolvimento da tela de receitas feitas
 // depois que for implementado requisito 43 de ser retidado
-const EnviadoneRecipes = [
+/* const EnviadoneRecipes = [
   {
     id: '52771',
     type: 'meal',
@@ -31,7 +31,7 @@ const EnviadoneRecipes = [
     tags: [],
   },
 ];
-localStorage.setItem('doneRecipes', JSON.stringify(EnviadoneRecipes));
+localStorage.setItem('doneRecipes', JSON.stringify(EnviadoneRecipes)); */
 // -----------------------------------------------------------------------------------
 
 ReactDOM
