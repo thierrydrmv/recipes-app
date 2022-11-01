@@ -1,7 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import profileIcon from '../images/profileIcon.svg';
 import Footer from './Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/profile.css';
 
 function Profile() {
@@ -35,30 +37,33 @@ function Profile() {
       />
       <div className="profile-items">
         <h4 data-testid="profile-email">{user?.email}</h4>
-        <button
-          className="buttons"
+        <Button
+          variant="success"
+          className="profile-buttons"
           type="button"
           data-testid="profile-done-btn"
           onClick={ pushToDoneRecipes }
         >
           Done Recipes
-        </button>
-        <button
-          className="buttons"
+        </Button>
+        <Button
+          variant="success"
+          className="profile-buttons"
           type="button"
           data-testid="profile-favorite-btn"
           onClick={ pushToFavoriteRecipes }
         >
           Favorite Recipes
-        </button>
-        <button
-          className="buttons"
+        </Button>
+        <Button
+          variant="success"
+          className="profile-buttons"
           type="button"
           data-testid="profile-logout-btn"
           onClick={ handleLogout }
         >
           Logout
-        </button>
+        </Button>
       </div>
       <Footer />
     </div>
