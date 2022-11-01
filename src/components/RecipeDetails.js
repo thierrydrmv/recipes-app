@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Copy from 'clipboard-copy';
 import RecipiesContext from '../context/RecipiesContext';
 import OneDrinkCard from './OneDrinkCard';
 import OneFoodCard from './OneFoodCard';
@@ -96,7 +97,7 @@ function RecipeDetails() {
 
   const handleShare = () => {
     setLinkCopiado(true);
-    navigator.clipboard.writeText(`http://localhost:3000${history.location.pathname}`);
+    Copy(`http://localhost:3000${history.location.pathname}`);
   };
 
   return (

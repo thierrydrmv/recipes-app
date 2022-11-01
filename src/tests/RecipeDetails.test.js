@@ -25,6 +25,7 @@ describe('testa a tela recipeDetails', () => {
       json: () => Promise.resolve(oneMeal),
     }));
     await act(async () => {
+      global.navigator.clipboard = { writeText: jest.fn() };
       RenderWithProvider(<RecipeDetails />, '/meals/52771');
     });
     const btnFixedBottom = screen.getByRole('button', { name: /continue recipe/i });
@@ -36,6 +37,7 @@ describe('testa a tela recipeDetails', () => {
     expect(favoriteBtn).toHaveAttribute('src', 'blackHeartIcon.svg');
     userEvent.click(btnShare);
     userEvent.click(favoriteBtn);
+    expect(global.navigator.clipboard.writeText).toBeCalledWith('http://localhost:3000/meals/52771');
   });
   it('testa o componente oneDrinkcard', async () => {
     global.fetch = jest.fn(() => Promise.resolve({
