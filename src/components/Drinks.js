@@ -41,6 +41,7 @@ function Drinks() {
     setDrinke(false);
     if (redirect) {
       history.push(redirect);
+      setRedirect('');
     } // toda vez que o meu redirect for atualizado vai acontecer a mudança de pagina
   }, [history, redirect, setPageTitle, setRoute, setDrinke]);
   const size = 12;
