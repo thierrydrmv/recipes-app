@@ -19,7 +19,6 @@ function Meals() {
     setMealcat,
     mealcatBool,
     setMealcatBool,
-    setRoute,
     setRedirect,
   } = useContext(RecipiesContext);
   const history = useHistory();
