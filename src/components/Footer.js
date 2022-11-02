@@ -12,7 +12,6 @@ export default function Footer() {
     setMeals([]);
     history.push(`/${pathName}`);
     setDrinke(false);
-
   };
 
   return (
