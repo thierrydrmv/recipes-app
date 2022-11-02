@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import PropTypes from 'prop-types';
 import RecipiesContext from './RecipiesContext';
@@ -67,6 +67,11 @@ function ContextProvider({ children }) {
       setMealApi,
       cocktailApi,
       setCocktailApi,
+      setNewUrl,
+      waitApi,
+      setWaitApi,
+      mealsEmpty,
+      setMealsEmpty,
     }), [email,
     pageTitle,
     switchSearch,
@@ -78,45 +83,7 @@ function ContextProvider({ children }) {
     loading,
     meat,
     idRecipeDetails, renderOneFood, mealApi, cocktailApi,
-    drinke, meale, drincat, mealcat, drincatBool, mealcatBool]);
-
-  useEffect(() => {
-    if (search?.searchType) {
-      let url = route === 'meals' ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
-      if (search.searchType === 'Ingredient') url += 'filter.php?i=';
-      if (search.searchType === 'Name') url += 'search.php?s=';
-      if (search.searchType === 'First letter') url += 'search.php?f=';
-      url += search.searchText;
-      if (search.searchType === 'First letter'
-      && search.searchText.length > 1) {
-        return global.alert('Your search must have only 1 (one) character');
-      }
-      setNewUrl(url);
-      setWaitApi(true);
-    }
-  }, [search]);
-
-  useEffect(() => {
-    if (mealsEmpty) {
-      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
-    }
-  }, [mealsEmpty]);
-  useEffect(() => {
-    const getApi = async (data) => {
-      const ret = await fetch(data);
-      const conteudo = await ret.json();
-      setLoading(true);
-      setMeals(conteudo);
-      setMeale(false);
-      setDrinke(false);
-      if (conteudo[route] === null) {
-        setMealsEmpty(true);
-      }
-    };
-    if (waitApi) {
-      getApi(newUrl);
-    }
-  }, [newUrl, waitApi]);
+    drinke, meale, drincat, mealcat, drincatBool, mealcatBool, waitApi, mealsEmpty]);
 
   return (
     <RecipiesContext.Provider value={ contextValue }>

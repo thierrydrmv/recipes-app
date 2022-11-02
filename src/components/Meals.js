@@ -23,16 +23,11 @@ function Meals() {
   } = useContext(RecipiesContext);
   const history = useHistory();
 
-  const fetchData = async () => {
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-    const data = await response.json();
-    return data;
-  };
-
   useEffect(() => {
     const requestAPI = async () => {
-      const response = await fetchData();
-      setMeat(response);
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      const data = await response.json();
+      setMeat(data);
       setMeale(true);
     };
     requestAPI();
