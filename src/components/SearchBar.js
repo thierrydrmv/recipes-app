@@ -15,7 +15,6 @@ function SearchBar() {
   useEffect(() => {
     if (meals[route] && loading && meals[route].length === 1) {
       if (route === 'meals') {
-
         setIdRecipeDetails(`${meals.meals[0].idMeal}`);
         setRedirect(`/meals/${meals.meals[0].idMeal}`);
       } else {
