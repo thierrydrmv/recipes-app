@@ -8,9 +8,61 @@ function SearchBar() {
     setsearch,
     meals,
     route,
-    setRedirect, loading, setLoading, setIdRecipeDetails } = useContext(RecipiesContext);
+    setRedirect,
+    loading,
+    setLoading,
+    setIdRecipeDetails,
+    setNewUrl,
+    setWaitApi,
+    waitApi,
+    mealsEmpty,
+    setMealsEmpty,
+    search,
+    newUrl,
+    setMeals,
+    setMeale,
+    setDrinke,
+  } = useContext(RecipiesContext);
   const [searchType, setsearchType] = useState();
   const [searchText, setsearchText] = useState('');
+
+  useEffect(() => {
+    if (search?.searchType) {
+      let url = route === 'meals' ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
+      if (search.searchType === 'Ingredient') url += 'filter.php?i=';
+      if (search.searchType === 'Name') url += 'search.php?s=';
+      if (search.searchType === 'First letter') url += 'search.php?f=';
+      url += search.searchText;
+      if (search.searchType === 'First letter'
+      && search.searchText.length > 1) {
+        return global.alert('Your search must have only 1 (one) character');
+      }
+      setNewUrl(url);
+      setWaitApi(true);
+    }
+  }, [search]);
+
+  useEffect(() => {
+    if (mealsEmpty) {
+      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+  }, [mealsEmpty]);
+  useEffect(() => {
+    const getApi = async (data) => {
+      const ret = await fetch(data);
+      const conteudo = await ret.json();
+      setLoading(true);
+      setMeals(conteudo);
+      setMeale(false);
+      setDrinke(false);
+      if (conteudo[route] === null) {
+        setMealsEmpty(true);
+      }
+    };
+    if (waitApi) {
+      getApi(newUrl);
+    }
+  }, [newUrl, waitApi]);
 
   useEffect(() => {
     if (meals[route] && loading && meals[route].length === 1) {
@@ -28,7 +80,6 @@ function SearchBar() {
   const handleSearch = () => {
     setsearch({ searchType, searchText });
   };
-
   return (
     <>
       <input
