@@ -1,4 +1,5 @@
 import profileIcon from '../images/profileIcon.svg';
+import Footer from './Footer';
 
 function Profile() {
   return (
@@ -7,6 +8,7 @@ function Profile() {
         Profile
       </h1>
       <img data-testid="profile-top-btn" src={ profileIcon } alt="" />
+      <Footer />
     </div>
   );
 }

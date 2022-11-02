@@ -4,9 +4,9 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import ContextProvider from '../context/ContextProvider';
 
-const RenderWithProvider = (children) => {
-  const history = createMemoryHistory();
-  return ({
+export default function RenderWithProvider(children, route = '/') {
+  const history = createMemoryHistory({ initialEntries: [route] });
+  return {
     ...render(
       <Router history={ history }>
         <ContextProvider>
@@ -15,7 +15,5 @@ const RenderWithProvider = (children) => {
       </Router>,
     ),
     history,
-  });
-};
-
-export default RenderWithProvider;
+  };
+}
