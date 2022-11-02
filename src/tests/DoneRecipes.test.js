@@ -5,6 +5,7 @@ import DoneRecipes from '../components/DoneRecipes';
 
 describe('Testa o componente "DoneRecipes"', () => {
   beforeEach(() => {
+    global.navigator.clipboard = { writeText: jest.fn() };
     const EnviadoneRecipes = [
       {
         id: '52771',
@@ -29,12 +30,8 @@ describe('Testa o componente "DoneRecipes"', () => {
         tags: [],
       },
     ];
-    localStorage.setItem('doneRecipes', JSON.stringify(EnviadoneRecipes));
+    global.localStorage.setItem('doneRecipes', JSON.stringify(EnviadoneRecipes));
     RenderWithProvider(<DoneRecipes />);
-  });
-
-  afterEach(() => {
-    localStorage.clear();
   });
 
   it('Testa se a página contém os botões necessários ', () => {

@@ -8,11 +8,11 @@ function DoneRecipes() {
   const [filtro, setFiltro] = useState('All');
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   const Compartilhar = (tipo, id) => {
-    const url = `${window.location.origin}/${tipo}s/${id}`;
+    const url = `http://localhost:3000/${tipo}s/${id}`;
+    console.log(url);
     Copy(url);
     setcopiado(true);
   };
-  console.log(filtro);
 
   return (
     <div>
