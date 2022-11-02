@@ -46,8 +46,8 @@ function Meals() {
       history.push(redirect);
     }
   }, [history, redirect, setPageTitle, setRoute, setMeale]);
-  
-    useEffect(() => {
+
+  useEffect(() => {
     if (redirect) {
       history.push(redirect);
       setRedirect('');
@@ -72,16 +72,16 @@ function Meals() {
   return (
     <div>
       <Header />
-   //   { mealcatBool
-   //   && mealcat?.map(({ categoryName }, index) => (
-   //     <button
-   //       key={ `${categoryName}-${index}` }
-   //       data-testid={ `{${categoryName}-category-filter}` }
-   //       type="button"
-   //     >
-   //       { categoryName }
-   //     </button>
-   //   ))}
+      { mealcatBool
+      && mealcat?.map(({ categoryName }, index) => (
+        <button
+          key={ `${categoryName}-${index}` }
+          data-testid={ `{${categoryName}-category-filter}` }
+          type="button"
+        >
+          { categoryName }
+        </button>
+      ))}
       { meale ? meat.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
         index < size && (
           <div data-testid={ `${index}-recipe-card` } key={ idMeal }>
