@@ -71,3 +71,7 @@
   bottom: 0;
   position: fixed;
 }
+
+.ingredient-checkbox:checked + * {
+  text-decoration: line-through solid black;
+}
