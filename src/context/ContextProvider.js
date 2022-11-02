@@ -15,6 +15,13 @@ function ContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [waitApi, setWaitApi] = useState(false);
   const [mealsEmpty, setMealsEmpty] = useState(false);
+  const [meat, setMeat] = useState([]);
+  const [drinke, setDrinke] = useState(false);
+  const [meale, setMeale] = useState(false);
+  const [drincat, setDrincat] = useState([]);
+  const [drincatBool, setDrincatBool] = useState(false);
+  const [mealcat, setMealcat] = useState([]);
+  const [mealcatBool, setMealcatBool] = useState(false);
   const [idRecipeDetails, setIdRecipeDetails] = useState();
   const [renderOneFood, setRenderOneFood] = useState([]);
   const [cocktailApi, setCocktailApi] = useState([]);
@@ -38,6 +45,20 @@ function ContextProvider({ children }) {
       setRedirect,
       loading,
       setLoading,
+      setMeat,
+      meat,
+      setDrinke,
+      drinke,
+      meale,
+      setMeale,
+      setDrincat,
+      drincat,
+      setMealcat,
+      mealcat,
+      drincatBool,
+      setDrincatBool,
+      mealcatBool,
+      setMealcatBool,
       idRecipeDetails,
       setIdRecipeDetails,
       renderOneFood,
@@ -49,10 +70,15 @@ function ContextProvider({ children }) {
     }), [email,
     pageTitle,
     switchSearch,
-    meals, search,
-    route, newUrl,
-    redirect, loading,
-    idRecipeDetails, renderOneFood, mealApi, cocktailApi]);
+    meals,
+    search,
+    route,
+    newUrl,
+    redirect,
+    loading,
+    meat,
+    idRecipeDetails, renderOneFood, mealApi, cocktailApi,
+    drinke, meale, drincat, mealcat, drincatBool, mealcatBool]);
 
   useEffect(() => {
     if (search?.searchType) {
@@ -81,6 +107,8 @@ function ContextProvider({ children }) {
       const conteudo = await ret.json();
       setLoading(true);
       setMeals(conteudo);
+      setMeale(false);
+      setDrinke(false);
       if (conteudo[route] === null) {
         setMealsEmpty(true);
       }

@@ -6,25 +6,63 @@ import Header from './Header';
 import Footer from './Footer';
 
 function Drinks() {
-  const { setPageTitle,
+  const {
+    setPageTitle,
     setRoute,
-    redirect, meals, setRedirect } = useContext(RecipiesContext);
-
+    redirect,
+    meals,
+    setMeat,
+    setDrincat,
+    // drincat,
+    meat,
+    drinke,
+    setRedirect,
+    setDrinke } = useContext(RecipiesContext);
   const history = useHistory();
+
+  const fetchData = async () => {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    return data;
+  };
+
+  useEffect(() => {
+    const requestAPI = async () => {
+      const response = await fetchData();
+      setMeat(response);
+      setDrinke(true);
+    };
+    requestAPI();
+  }, []);
+
   useEffect(() => {
     setPageTitle('Drinks');
     setRoute('drinks');
+    setDrinke(false);
     if (redirect) {
       history.push(redirect);
       setRedirect('');
-    }
-  }, [history, redirect, setPageTitle, setRoute, setRedirect]);
+    } // toda vez que o meu redirect for atualizado vai acontecer a mudança de pagina
+  }, [history, redirect, setPageTitle, setRoute, setDrinke]);
   const size = 12;
+
+  useEffect(() => {
+    const fetchDrink = async () => {
+      const five = 6;
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+      const data = await response.json();
+      const newData = data.drinks.splice(0, five);
+      newData
+        .map((item) => ({ categoryName: item.strCategory }));
+      setDrincat(newData);
+    };
+    fetchDrink();
+  }, []);
+
   return (
     <div>
       <Header />
-      { meals.drinks?.length > 1
-      && meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+      {drinke ? meat.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
         index < size && (
           <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
             <p data-testid={ `${index}-card-name` }>{strDrink}</p>
@@ -35,7 +73,19 @@ function Drinks() {
             />
           </div>
         )
-      ))}
+      )) : (
+        meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+          index < size && (
+            <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
+              <p data-testid={ `${index}-card-name` }>{strDrink}</p>
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ strDrinkThumb }
+                alt={ idDrink }
+              />
+            </div>
+          )
+        )))}
       <Footer />
     </div>
   );

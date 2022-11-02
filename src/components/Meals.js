@@ -8,28 +8,81 @@ import Footer from './Footer';
 function Meals() {
   const {
     setPageTitle,
-    setRoute, redirect,
-    meals, setRedirect } = useContext(RecipiesContext);
+    setRoute,
+    redirect,
+    meals,
+    setMeat,
+    setMeale,
+    meat,
+    meale,
+    mealcat,
+    setMealcat,
+    mealcatBool,
+    setMealcatBool,
+    setRedirect,
+  } = useContext(RecipiesContext);
   const history = useHistory();
 
+  const fetchData = async () => {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    return data;
+  };
+
   useEffect(() => {
+    const requestAPI = async () => {
+      const response = await fetchData();
+      setMeat(response);
+      setMeale(true);
+    };
+    requestAPI();
+  }, []);
+
+  useEffect(() => {
+    setPageTitle('Meals');
+    setRoute('meals');
+    setMeale(false);
+    if (redirect) {
+      history.push(redirect);
+    }
+  }, [history, redirect, setPageTitle, setRoute, setMeale]);
+  
+    useEffect(() => {
     if (redirect) {
       history.push(redirect);
       setRedirect('');
     }
   });
 
-  useEffect(() => {
-    setPageTitle('Meals');
-    setRoute('meals');
-  }, [setPageTitle, setRoute]);
-
   const size = 12;
+
+  useEffect(() => {
+    const fetchMeal = async () => {
+      const fiveMeats = 6;
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+      const data = await response.json();
+      const newData = data.meals.splice(0, fiveMeats);
+      newData
+        .map((item) => ({ categoryName: item.strCategory }));
+      setMealcat(newData);
+      setMealcatBool(true);
+    };
+    fetchMeal();
+  }, []);
   return (
     <div>
       <Header />
-      { meals.meals?.length > 1
-      && meals.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
+   //   { mealcatBool
+   //   && mealcat?.map(({ categoryName }, index) => (
+   //     <button
+   //       key={ `${categoryName}-${index}` }
+   //       data-testid={ `{${categoryName}-category-filter}` }
+   //       type="button"
+   //     >
+   //       { categoryName }
+   //     </button>
+   //   ))}
+      { meale ? meat.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
         index < size && (
           <div data-testid={ `${index}-recipe-card` } key={ idMeal }>
             <p data-testid={ `${index}-card-name` }>{strMeal}</p>
@@ -40,7 +93,22 @@ function Meals() {
             />
           </div>
         )
-      ))}
+      )) : (
+        meals.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
+          index < size && (
+            <div
+              data-testid={ `${index}-recipe-card` }
+              key={ idMeal }
+            >
+              <p data-testid={ `${index}-card-name` }>{strMeal}</p>
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ strMealThumb }
+                alt={ idMeal }
+              />
+            </div>
+          )
+        )))}
       <Footer />
     </div>
   );
