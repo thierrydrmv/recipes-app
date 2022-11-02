@@ -19,6 +19,8 @@ function Meals() {
     setMealcat,
     mealcatBool,
     setMealcatBool,
+    setRoute,
+    setRedirect,
   } = useContext(RecipiesContext);
   const history = useHistory();
 
@@ -45,6 +47,14 @@ function Meals() {
       history.push(redirect);
     }
   }, [history, redirect, setPageTitle, setRoute, setMeale]);
+  
+    useEffect(() => {
+    if (redirect) {
+      history.push(redirect);
+      setRedirect('');
+    }
+  });
+
   const size = 12;
 
   useEffect(() => {
@@ -63,53 +73,16 @@ function Meals() {
   return (
     <div>
       <Header />
-      <button
-        type="button"
-
-      >
-        All
-      </button>
-      <button
-        type="button"
-
-      >
-        Beef
-      </button>
-      <button
-        type="button"
-
-      >
-        Breakfast
-      </button>
-      <button
-        type="button"
-
-      >
-        Chicken
-      </button>
-      <button
-        type="button"
-
-      >
-        Dessert
-      </button>
-      <button
-        type="button"
-
-      >
-        Goat
-      </button>
-
-      { mealcatBool
-      && mealcat?.map(({ categoryName }, index) => (
-        <button
-          key={ `${categoryName}-${index}` }
-          data-testid={ `{${categoryName}-category-filter}` }
-          type="button"
-        >
-          { categoryName }
-        </button>
-      ))}
+   //   { mealcatBool
+   //   && mealcat?.map(({ categoryName }, index) => (
+   //     <button
+   //       key={ `${categoryName}-${index}` }
+   //       data-testid={ `{${categoryName}-category-filter}` }
+   //       type="button"
+   //     >
+   //       { categoryName }
+   //     </button>
+   //   ))}
       { meale ? meat.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
         index < size && (
           <div data-testid={ `${index}-recipe-card` } key={ idMeal }>
@@ -122,7 +95,6 @@ function Meals() {
           </div>
         )
       )) : (
-
         meals.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
           index < size && (
             <div
@@ -137,9 +109,7 @@ function Meals() {
               />
             </div>
           )
-        ))
-
-      )}
+        )))}
       <Footer />
     </div>
   );

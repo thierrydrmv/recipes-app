@@ -8,20 +8,23 @@ function SearchBar() {
     setsearch,
     meals,
     route,
-    setRedirect, loading, setLoading } = useContext(RecipiesContext);
+    setRedirect, loading, setLoading, setIdRecipeDetails } = useContext(RecipiesContext);
   const [searchType, setsearchType] = useState();
   const [searchText, setsearchText] = useState('');
 
   useEffect(() => {
     if (meals[route] && loading && meals[route].length === 1) {
       if (route === 'meals') {
-        setRedirect(`/${route}/${meals.meals[0].idMeal}`);
+
+        setIdRecipeDetails(`${meals.meals[0].idMeal}`);
+        setRedirect(`/meals/${meals.meals[0].idMeal}`);
       } else {
-        setRedirect(`/${route}/${meals.drinks[0].idDrink}`);
+        setIdRecipeDetails(`${meals.drinks[0].idDrink}`);
+        setRedirect(`/drinks/${meals.drinks[0].idDrink}`);
       }
     }
     setLoading(false);
-  }, [history, loading, meals, route, setLoading, setRedirect]);
+  }, [history, loading, meals, route, setLoading, setRedirect, setIdRecipeDetails]);
 
   const handleSearch = () => {
     setsearch({ searchType, searchText });

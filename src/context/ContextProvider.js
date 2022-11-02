@@ -22,6 +22,10 @@ function ContextProvider({ children }) {
   const [drincatBool, setDrincatBool] = useState(false);
   const [mealcat, setMealcat] = useState([]);
   const [mealcatBool, setMealcatBool] = useState(false);
+  const [idRecipeDetails, setIdRecipeDetails] = useState();
+  const [renderOneFood, setRenderOneFood] = useState([]);
+  const [cocktailApi, setCocktailApi] = useState([]);
+  const [mealApi, setMealApi] = useState([]);
 
   const contextValue = useMemo(() => (
     { email,
@@ -55,6 +59,14 @@ function ContextProvider({ children }) {
       setDrincatBool,
       mealcatBool,
       setMealcatBool,
+      idRecipeDetails,
+      setIdRecipeDetails,
+      renderOneFood,
+      setRenderOneFood,
+      mealApi,
+      setMealApi,
+      cocktailApi,
+      setCocktailApi,
     }), [email,
     pageTitle,
     switchSearch,
@@ -65,6 +77,7 @@ function ContextProvider({ children }) {
     redirect,
     loading,
     meat,
+    idRecipeDetails, renderOneFood, mealApi, cocktailApi,
     drinke, meale, drincat, mealcat, drincatBool, mealcatBool]);
 
   useEffect(() => {

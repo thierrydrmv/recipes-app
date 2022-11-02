@@ -16,6 +16,7 @@ function Drinks() {
     // drincat,
     meat,
     drinke,
+    setRedirect,
     setDrinke } = useContext(RecipiesContext);
   const history = useHistory();
 
@@ -60,42 +61,6 @@ function Drinks() {
   return (
     <div>
       <Header />
-      <button
-        type="button"
-
-      >
-        All
-      </button>
-      <button
-        type="button"
-
-      >
-        Ordinary Drink
-      </button>
-      <button
-        type="button"
-
-      >
-        Cocktail
-      </button>
-      <button
-        type="button"
-
-      >
-        Shake
-      </button>
-      <button
-        type="button"
-
-      >
-        Other/Unknow
-      </button>
-      <button
-        type="button"
-
-      >
-        Cocoa
-      </button>
       {drinke ? meat.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
         index < size && (
           <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
