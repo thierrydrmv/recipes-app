@@ -47,15 +47,16 @@ function RecipeDetails() {
     const route = history.location.pathname.split('/')[1];
     const id = history.location.pathname.split('/')[2];
 
-    const ingredientes = renderOneFood[0].ingredientAndMeasureList[0].ingredient;
-    const filteredIngredients = ingredientes.filter((item) => item.length > 1);
-    history.push(`${history.location.pathname}/in-progress`);
+    const ingredientes = renderOneFood[0]
+      .ingredientAndMeasureList[0].ingredient
+      .filter((item) => (item !== null && item.length > 0));
     localStorage.setItem(
       'inProgressRecipes',
       JSON.stringify(
-        { [route]: { [id]: filteredIngredients } },
+        { [route]: { [id]: ingredientes } },
       ),
     );
+    history.push(`${history.location.pathname}/in-progress`);
   };
 
   const handleFavorites = () => {
