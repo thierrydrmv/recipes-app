@@ -44,6 +44,18 @@ function RecipeDetails() {
   }, [inProgress]);
 
   const handleButton = () => {
+    const route = history.location.pathname.split('/')[1];
+    const id = history.location.pathname.split('/')[2];
+
+    const ingredientes = renderOneFood[0]
+      .ingredientAndMeasureList[0].ingredient
+      .filter((item) => (item !== null && item.length > 0));
+    localStorage.setItem(
+      'inProgressRecipes',
+      JSON.stringify(
+        { [route]: { [id]: ingredientes } },
+      ),
+    );
     history.push(`${history.location.pathname}/in-progress`);
   };
 
@@ -51,7 +63,6 @@ function RecipeDetails() {
     const route = history.location.pathname.split('/')[1];
 
     const favorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    console.log(renderOneFood[0].idMeal);
     if (route === 'meals') {
       const { idMeal: id,
         strCategory: category,
