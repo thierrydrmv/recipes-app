@@ -12,13 +12,13 @@ function Drinks() {
     redirect,
     meals,
     setMeat,
+    drincat,
     setDrincat,
     meat,
     drinke,
     setRedirect,
     setDrinke } = useContext(RecipiesContext);
   const history = useHistory();
-
   useEffect(() => {
     const requestAPI = async () => {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
@@ -28,7 +28,6 @@ function Drinks() {
     };
     requestAPI();
   }, []);
-
   useEffect(() => {
     setPageTitle('Drinks');
     setRoute('drinks');
@@ -39,23 +38,36 @@ function Drinks() {
     } // toda vez que o meu redirect for atualizado vai acontecer a mudança de pagina
   }, [history, redirect, setPageTitle, setRoute, setDrinke]);
   const size = 12;
-
   useEffect(() => {
     const fetchDrink = async () => {
       const five = 6;
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
       const data = await response.json();
       const newData = data.drinks.splice(0, five);
-      newData
-        .map((item) => ({ categoryName: item.strCategory }));
-      setDrincat(newData);
+      const category = newData
+        .map((item) => (item.strCategory));
+      setDrincat(category);
     };
     fetchDrink();
   }, []);
-
+  const handleCategory = async (category) => {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+    const data = await response.json();
+    setMeat(data);
+  };
   return (
     <div>
       <Header />
+      { drincat?.map((categoryName, index) => (
+        <button
+          key={ `${categoryName}-${index}` }
+          data-testid={ `{${categoryName}-category-filter}` }
+          type="button"
+          onClick={ () => handleCategory(categoryName) }
+        >
+          { categoryName }
+        </button>
+      ))}
       {drinke ? meat.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
         index < size && (
           <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
@@ -84,11 +96,9 @@ function Drinks() {
     </div>
   );
 }
-
 Drinks.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
 };
-
 export default Drinks;

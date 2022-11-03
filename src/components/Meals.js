@@ -22,7 +22,6 @@ function Meals() {
     setRedirect,
   } = useContext(RecipiesContext);
   const history = useHistory();
-
   useEffect(() => {
     const requestAPI = async () => {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
@@ -32,7 +31,6 @@ function Meals() {
     };
     requestAPI();
   }, []);
-
   useEffect(() => {
     setPageTitle('Meals');
     setRoute('meals');
@@ -41,38 +39,41 @@ function Meals() {
       history.push(redirect);
     }
   }, [history, redirect, setPageTitle, setRoute, setMeale]);
-
   useEffect(() => {
     if (redirect) {
       history.push(redirect);
       setRedirect('');
     }
   });
-
   const size = 12;
-
   useEffect(() => {
     const fetchMeal = async () => {
       const fiveMeats = 6;
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
       const data = await response.json();
       const newData = data.meals.splice(0, fiveMeats);
-      newData
-        .map((item) => ({ categoryName: item.strCategory }));
-      setMealcat(newData);
+      const category = newData
+        .map((item) => (item.strCategory));
+      setMealcat(category);
       setMealcatBool(true);
     };
     fetchMeal();
   }, []);
+  const handleCategory = async (category) => {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+    const data = await response.json();
+    setMeat(data);
+  };
   return (
     <div>
       <Header />
       { mealcatBool
-      && mealcat?.map(({ categoryName }, index) => (
+      && mealcat?.map((categoryName, index) => (
         <button
           key={ `${categoryName}-${index}` }
           data-testid={ `{${categoryName}-category-filter}` }
           type="button"
+          onClick={ () => handleCategory(categoryName) }
         >
           { categoryName }
         </button>
@@ -108,11 +109,9 @@ function Meals() {
     </div>
   );
 }
-
 Meals.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
 };
-
 export default Meals;
