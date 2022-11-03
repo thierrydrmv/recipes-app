@@ -25,6 +25,7 @@ function OneFoodCard() {
     };
     fetchApiMeal();
   }, []);
+
   return (
     <div>
       {renderOneFood?.map(({

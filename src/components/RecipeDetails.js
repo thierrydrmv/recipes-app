@@ -44,14 +44,24 @@ function RecipeDetails() {
   }, [inProgress]);
 
   const handleButton = () => {
+    const route = history.location.pathname.split('/')[1];
+    const id = history.location.pathname.split('/')[2];
+
+    const ingredientes = renderOneFood[0].ingredientAndMeasureList[0].ingredient;
+    const filteredIngredients = ingredientes.filter((item) => item.length > 1);
     history.push(`${history.location.pathname}/in-progress`);
+    localStorage.setItem(
+      'inProgressRecipes',
+      JSON.stringify(
+        { [route]: { [id]: filteredIngredients } },
+      ),
+    );
   };
 
   const handleFavorites = () => {
     const route = history.location.pathname.split('/')[1];
 
     const favorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    console.log(renderOneFood[0].idMeal);
     if (route === 'meals') {
       const { idMeal: id,
         strCategory: category,
