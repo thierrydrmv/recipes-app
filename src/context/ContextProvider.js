@@ -26,6 +26,7 @@ function ContextProvider({ children }) {
   const [renderOneFood, setRenderOneFood] = useState([]);
   const [cocktailApi, setCocktailApi] = useState([]);
   const [mealApi, setMealApi] = useState([]);
+  const [checkBox, setCheckBox] = useState([]);
 
   const contextValue = useMemo(() => (
     { email,
@@ -72,6 +73,8 @@ function ContextProvider({ children }) {
       setWaitApi,
       mealsEmpty,
       setMealsEmpty,
+      checkBox,
+      setCheckBox,
     }), [email,
     pageTitle,
     switchSearch,
@@ -83,7 +86,8 @@ function ContextProvider({ children }) {
     loading,
     meat,
     idRecipeDetails, renderOneFood, mealApi, cocktailApi,
-    drinke, meale, drincat, mealcat, drincatBool, mealcatBool, waitApi, mealsEmpty]);
+    drinke, meale, drincat, mealcat, drincatBool, mealcatBool,
+    waitApi, mealsEmpty, checkBox]);
 
   return (
     <RecipiesContext.Provider value={ contextValue }>
