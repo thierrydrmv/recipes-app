@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import RecipiesContext from '../context/RecipiesContext';
-import rockGlass from '../images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Login({ history }) {
@@ -29,20 +28,12 @@ function Login({ history }) {
   };
 
   return (
-    <div>
-
+    <div className="tela">
       <div className="meals">
-        <h1>Login</h1>
-        <span className="logo">Grupo-16</span>
-        <object
-          className="rocksGlass"
-          type="image/svg+xml"
-          data={ rockGlass }
-        >
-          Glass
-        </object>
-        <div>
+        <div className="elementosLogin">
+          <h1>Login</h1>
           <input
+            className="email"
             type="email"
             placeholder="E-mail"
             data-testid="email-input"
@@ -51,6 +42,7 @@ function Login({ history }) {
             onChange={ handleEmail }
           />
           <input
+            className="password"
             type="text"
             placeholder="Password"
             data-testid="password-input"
@@ -58,16 +50,16 @@ function Login({ history }) {
             value={ password }
             onChange={ handlePassword }
           />
-          <button
-            type="button"
-            data-testid="login-submit-btn"
-            disabled={ formValidation() }
-            onClick={ handleClick }
-            className="button"
-          >
-            Enter
-          </button>
         </div>
+        <button
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ formValidation() }
+          onClick={ handleClick }
+          className="button"
+        >
+          Enter
+        </button>
       </div>
     </div>
   );

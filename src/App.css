@@ -1,19 +1,52 @@
-.meals {
+.tela {
   align-items: center;
-  background: #0fa36b;
-  color: #464646;
+  background: rgb(43, 50, 68);
+  background-image: url('https://images.pexels.com/photos/10422319/pexels-photo-10422319.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
   height: 100vh;
   justify-content: center;
-  width: 100%;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+.imagem {
+  filter: blur(2px);
+  height: 100vh;
 }
+
+.meals {
+  z-index: 2;
+}
+
+.elementosLogin {
+  align-items: center;
+  background-color: rgb(225, 226, 228);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  width: 240px;
+}
+
+.email {
+  all: unset;
+  border-bottom: 1px solid black;
+}
+
+.password {
+  all: unset;
+  border-bottom: 1px solid black;
+}
+
+.button {
+  background-color: rgb(234, 30, 99);
+  border-radius: 10px;
+  width: 240px;
+}
+
 
 /*
 #iceLeft {
@@ -28,44 +61,6 @@
   transform-origin: 60px 78px;
 }
 */
-
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
-}
-
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
-}
-
-@keyframes clink {
-
-  0% {
-    transform: rotate(-10deg);
-  }
-
-  50% {
-    transform: rotate(20deg);
-  }
-
-  100% {
-    transform: rotate(-10deg);
-  }
-}
 
 .footer {
   bottom: 0;
