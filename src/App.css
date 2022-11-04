@@ -1,7 +1,7 @@
 .tela {
   align-items: center;
   background: rgb(43, 50, 68);
-  background-image: url('https://images.pexels.com/photos/10422319/pexels-photo-10422319.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  background-image: url('https://as2.ftcdn.net/v2/jpg/02/36/07/53/1000_F_236075373_18Jjkjx1fJyKUZg7goQzvCwHuCE8PdRH.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -12,13 +12,14 @@
   justify-content: center;
 }
 
+
 .meals {
   z-index: 2;
 }
 
 .elementosLogin {
   align-items: center;
-  background-color:#3c3d3f;
+  background-color: #3c3d3f;
   border-radius: 10px;
   color: white;
   display: flex;
@@ -42,8 +43,8 @@
 .button {
   background-color: #157347;
   border-radius: 10px;
-  width: 240px;
   color: white;
+  width: 240px;
 }
 
 .icons {
@@ -77,4 +78,9 @@
 
 .ingredient-checkbox:checked + * {
   text-decoration: line-through solid black;
+}
+
+.tag {
+  display: flex;
+  flex-direction: column;
 }

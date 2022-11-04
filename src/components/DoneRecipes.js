@@ -1,5 +1,6 @@
 import Copy from 'clipboard-copy';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,14 +16,24 @@ function DoneRecipes() {
     Copy(url);
     setcopiado(true);
   };
+  const history = useHistory();
+  const handleClick = (pathName) => {
+    history.push(`/${pathName}`);
+  };
   return (
-    <section className="favRecipes-container">
-      <img
-        className="profile-img"
-        data-testid="profile-top-btn"
-        src={ profileIcon }
-        alt=""
-      />
+    <section className="doneRecipes-container">
+      <button
+        type="button"
+        onClick={ () => { handleClick('profile'); } }
+        className="icons"
+      >
+        <img
+          data-testid="profile-top-btn"
+          src={ profileIcon }
+          alt=""
+          className="profile-img"
+        />
+      </button>
       <div>
         <h1 data-testid="page-title">
           Done Recipes
@@ -69,35 +80,30 @@ function DoneRecipes() {
               />
             </a>
             <section className="card-container">
-              <div className="nameToCategory">
-                <p data-testid={ `${index}-horizontal-top-text` }>
-                  Nacionalidade/Categoria/alcoolico ou não:
-                  { `${recipe.nationality} - ${recipe.category}`}
-                  {recipe.alcoholicOrNot}
-                </p>
-                <a href={ `/${recipe.type}s/${recipe.id}` }>
-                  <p
-                    data-testid={ `${index}-horizontal-name` }
-                  >
-                    Nome :
-                    { recipe.name }
+              <div>
+                <div className="nameToCategory">
+                  <a href={ `/${recipe.type}s/${recipe.id}` }>
+                    <p
+                      data-testid={ `${index}-horizontal-name` }
+                    >
+                      { recipe.name }
+                    </p>
+                  </a>
+                  <p data-testid={ `${index}-horizontal-top-text` }>
+                    { `${recipe.nationality} - ${recipe.category}`}
+                    {recipe.alcoholicOrNot}
                   </p>
-                </a>
+                </div>
+                <div className="d-flex">
+                  <p data-testid={ `${index}-horizontal-done-date` }>
+                    Data :
+                    {recipe.doneDate}
+                  </p>
+
+                </div>
               </div>
-              <p data-testid={ `${index}-horizontal-done-date` }>
-                Data :
-                {recipe.doneDate}
-              </p>
-              Tags:
-              {recipe.tags.map((tagName, idx) => (
-                <p
-                  key={ idx }
-                  data-testid={ `${index}-${tagName}-horizontal-tag` }
-                >
-                  {tagName}
-                </p>
-              ))}
-              <div className="icons">
+              <br />
+              <div className="icons text-center">
                 <button
                   className="shareIcon"
                   type="button"

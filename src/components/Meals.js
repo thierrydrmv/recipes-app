@@ -67,7 +67,7 @@ function Meals() {
     setMeat(data);
   };
   return (
-    <div>
+    <div className="test">
       <Header />
       <div className="button-container text-center">
         { mealcatBool
