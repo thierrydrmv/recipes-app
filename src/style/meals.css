@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;1,100&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;1,100&display=swap'); */
 .buttons-container {
   display: flex;
   flex-direction: row;
@@ -10,8 +9,8 @@
 .meal-buttons {
   align-items: center;
   border-radius: 100%;
-  font-family: 'Epilogue', sans-serif;
   color: white;
+  font-family: Epilogue , sans-serif;
   font-size: small;
   height: 50px;
   margin: 5px;
@@ -21,8 +20,7 @@
 .card-container {
   align-items: center;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: center;
   margin-bottom: 65px;
   margin-top: 15px;
@@ -30,11 +28,11 @@
 
 .recipe-card {
   align-items: center;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.63);
   border: 2px solid lightgrey;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.63);
   display: flex;
   flex-direction: column;
-  font-family: 'Epilogue', sans-serif;
+  font-family: Epilogue , sans-serif;
   font-size: small;
   height: 200px;
   margin: 5px;

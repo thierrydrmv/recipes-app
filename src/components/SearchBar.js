@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import RecipiesContext from '../context/RecipiesContext';
 
 function SearchBar() {
@@ -83,19 +82,21 @@ function SearchBar() {
   };
   return (
     <div className="pb-2 mb-4 border-bottom border-secondary ">
-      <div  className="input-group input-group-sm mb-3">
-      <input
-            className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
-            type="text"
-            placeholder="Search"
-            data-testid="search-input"
-            name="search"
-            value={ searchText }
-            onChange={ (event) => setsearchText(event.target.value) }
-          /> 
+      <div className="input-group input-group-sm mb-3">
+        <input
+          className="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-sm"
+          type="text"
+          placeholder="Search"
+          data-testid="search-input"
+          name="search"
+          value={ searchText }
+          onChange={ (event) => setsearchText(event.target.value) }
+        />
       </div>
-      <div className='d-flex justify-content-around' >
-        <label htmlFor="ingredient-search"> 
+      <div className="d-flex justify-content-around">
+        <label htmlFor="ingredient-search">
           <input
             className="form-check-input radio-btn"
             name="searchType"

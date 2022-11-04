@@ -136,7 +136,7 @@ function RecipeDetails() {
           <img src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon } alt="" />
         </button>
       </div>
-      
+
       { history.location.pathname.split('/')[1] === 'meals'
         ? <OneFoodCard /> : <OneDrinkCard />}
 

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import RecipiesContext from '../context/RecipiesContext';
 import Header from './Header';
 import Footer from './Footer';
@@ -71,7 +70,7 @@ function Meals() {
     <div>
       <Header />
       <div className="button-container text-center">
-      { mealcatBool
+        { mealcatBool
       && mealcat?.map((categoryName, index) => (
         <button
           className="btn btn-success m-1"
@@ -90,7 +89,8 @@ function Meals() {
             <div
               className="recipe-card"
               data-testid={ `${index}-recipe-card` }
-              key={ idMeal }>
+              key={ idMeal }
+            >
               <img
                 className="imagem"
                 data-testid={ `${index}-card-img` }
@@ -118,9 +118,9 @@ function Meals() {
               </div>
             )
           )))}
-        </div>
-      
-        <Footer />
+      </div>
+
+      <Footer />
     </div>
   );
 }

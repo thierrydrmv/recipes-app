@@ -19,13 +19,15 @@ export default function Footer() {
       <button
         className="icons"
         type="button"
-        onClick={ () => handleClick('drinks') }>
+        onClick={ () => handleClick('drinks') }
+      >
         <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="drinks" />
       </button>
       <button
         className="icons"
         type="button"
-        onClick={ () => handleClick('meals') }>
+        onClick={ () => handleClick('meals') }
+      >
         <img data-testid="meals-bottom-btn" src={ mealIcon } alt="meals" />
       </button>
     </section>

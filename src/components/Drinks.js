@@ -62,41 +62,26 @@ function Drinks() {
     <div>
       <Header />
       <div className="button-container text-center">
-      { drincat?.map((categoryName, index) => (
-        <button
-          className="btn btn-success text-center m-1"
-          key={ `${categoryName}-${index}` }
-          data-testid={ `{${categoryName}-category-filter}` }
-          type="button"
-          onClick={ () => handleCategory(categoryName) }
-        >
-          { categoryName }
-        </button>
-      ))}
+        { drincat?.map((categoryName, index) => (
+          <button
+            className="btn btn-success text-center m-1"
+            key={ `${categoryName}-${index}` }
+            data-testid={ `{${categoryName}-category-filter}` }
+            type="button"
+            onClick={ () => handleCategory(categoryName) }
+          >
+            { categoryName }
+          </button>
+        ))}
       </div>
       <div className="card-container">
-      {drinke ? meat.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-        index < size && (
-          <div 
-            className="recipe-card"
-            data-testid={ `${index}-recipe-card` }
-            key={ idDrink }>
-            <img
-              className="imagem"
-              data-testid={ `${index}-card-img` }
-              src={ strDrinkThumb }
-              alt={ idDrink }
-            />
-            <p data-testid={ `${index}-card-name` }>{strDrink}</p>
-          </div>
-        )
-      )) : (
-        meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+        {drinke ? meat.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
           index < size && (
             <div
               className="recipe-card"
               data-testid={ `${index}-recipe-card` }
-              key={ idDrink }>
+              key={ idDrink }
+            >
               <img
                 className="imagem"
                 data-testid={ `${index}-card-img` }
@@ -106,9 +91,26 @@ function Drinks() {
               <p data-testid={ `${index}-card-name` }>{strDrink}</p>
             </div>
           )
-        )))}
+        )) : (
+          meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+            index < size && (
+              <div
+                className="recipe-card"
+                data-testid={ `${index}-recipe-card` }
+                key={ idDrink }
+              >
+                <img
+                  className="imagem"
+                  data-testid={ `${index}-card-img` }
+                  src={ strDrinkThumb }
+                  alt={ idDrink }
+                />
+                <p data-testid={ `${index}-card-name` }>{strDrink}</p>
+              </div>
+            )
+          )))}
       </div>
-      
+
       <Footer />
     </div>
   );

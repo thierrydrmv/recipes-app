@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import Copy from 'clipboard-copy';
 import RecipiesContext from '../context/RecipiesContext';
 import shareIcon from '../images/shareIcon.svg';
@@ -12,7 +11,6 @@ export default function RecipeInProgress() {
   const url = history.location.pathname.split('/');
   const [linkCopiado, setLinkCopiado] = useState(false);
   const [favoriteIcon, setFavoriteIcon] = useState(false);
-  // ['','meals','503014','in-progress'];
   const { renderOneFood, setRenderOneFood,
     checkBox, setCheckBox } = useContext(RecipiesContext);
 
@@ -92,8 +90,7 @@ export default function RecipeInProgress() {
     return;
   }
   const { ingredientsAndMeasureList, strMeal,
-    strMealThumb, strInstructions, strCategory } = renderOneFood;
-  const { strDrink,
+    strMealThumb, strInstructions, strDrink,
     strDrinkThumb, strAlcoholic } = renderOneFood;
   const { ingredient } = ingredientsAndMeasureList;
   console.log(renderOneFood);
@@ -166,10 +163,10 @@ export default function RecipeInProgress() {
             data-testid="recipe-photo"
             src={ strMealThumb }
             alt={ strMealThumb }
-            width='360'
+            width="360"
           />
           <div className="text-center m-3">
-              <h5>Ingredients</h5>
+            <h5>Ingredients</h5>
           </div>
           <div className="m-3">
             {ingredient?.map((element, index) => (
@@ -221,11 +218,7 @@ export default function RecipeInProgress() {
               <span>{element}</span>
             </label>
           ))}
-          <button
-            type="button"
-            data-testid="share-btn"
-            onClick={ handleShare }
-          >
+          <button type="button" data-testid="share-btn" onClick={ handleShare }>
             <img src={ shareIcon } alt="" />
           </button>
           {linkCopiado && <h3>Link copied!</h3>}

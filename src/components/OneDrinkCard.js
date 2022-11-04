@@ -31,7 +31,7 @@ function OneDrinkCard() {
   return (
     <div>
       {renderOneFood?.map(({
-        idDrink, strDrinkThumb, strDrink, strInstructions, strAlcoholic,
+        idDrink, strDrinkThumb, strDrink, strInstructions,
         ingredientAndMeasureList,
       }) => (
         (
@@ -51,15 +51,16 @@ function OneDrinkCard() {
             <div className="ingredients-container">
               {ingredientAndMeasureList.map(
                 ({ ingredient, measure }) => ingredient.map((i, index) => (
-                  <div key={ `${index}-${i}` }
-                >
-                  <p
-                    className="ingredients"
-                    data-testid={ `${index}-ingredient-name-and-measure` }
+                  <div
+                    key={ `${index}-${i}` }
                   >
-                    {`${i} ${measure[index]}`}
-                  </p>
-                </div>
+                    <p
+                      className="ingredients"
+                      data-testid={ `${index}-ingredient-name-and-measure` }
+                    >
+                      {`${i} ${measure[index]}`}
+                    </p>
+                  </div>
                 )),
               )}
             </div>
