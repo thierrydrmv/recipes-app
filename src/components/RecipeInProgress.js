@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import Copy from 'clipboard-copy';
 import RecipiesContext from '../context/RecipiesContext';
 import shareIcon from '../images/shareIcon.svg';
@@ -59,6 +60,7 @@ export default function RecipeInProgress() {
       const prev = localStorage.getItem('inProgressRecipes');
       const previous = prev ? JSON.parse(prev)[url[1]][url[2]] : '';
       setCheckBox(previous || Array(ingredients.length).fill(false));
+      console.log(checkBox);
     } else {
       const ingredients = fetchApiCocktail();
       const prev = localStorage.getItem('inProgressRecipes');
@@ -168,7 +170,7 @@ export default function RecipeInProgress() {
           <div className="text-center m-3">
             <h5>Ingredients</h5>
           </div>
-          <div className="m-3">
+          <div className="m-3 d-flex flex-column">
             {ingredient?.map((element, index) => (
               <label
                 key={ element }
@@ -184,16 +186,21 @@ export default function RecipeInProgress() {
                 <span>{element}</span>
               </label>
             ))}
+            <div className="text-center m-3">
+              <h5>Instructions</h5>
+            </div>
             <p data-testid="instructions">{strInstructions}</p>
           </div>
-          <button
+          <Button
             disabled={ !checkBox.every((check) => check === true) }
             type="button"
             data-testid="finish-recipe-btn"
             onClick={ handleClick }
+            className="fixed-bottom"
+            variant="success"
           >
             Finish Recipe
-          </button>
+          </Button>
         </div>
       ) : (
         <div>

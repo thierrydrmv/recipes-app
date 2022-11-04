@@ -47,7 +47,7 @@ function RecipeDetails() {
   }, [inProgress]);
 
   const handleButton = () => {
-    const route = history.location.pathname.split('/')[1];
+    /* const route = history.location.pathname.split('/')[1];
     const id = history.location.pathname.split('/')[2];
 
     const ingredientes = renderOneFood[0]
@@ -58,7 +58,7 @@ function RecipeDetails() {
       JSON.stringify(
         { [route]: { [id]: ingredientes } },
       ),
-    );
+    ); */
     history.push(`${history.location.pathname}/in-progress`);
   };
 
