@@ -12,19 +12,15 @@
   justify-content: center;
 }
 
-.imagem {
-  filter: blur(2px);
-  height: 100vh;
-}
-
 .meals {
   z-index: 2;
 }
 
 .elementosLogin {
   align-items: center;
-  background-color: rgb(225, 226, 228);
+  background-color:#3c3d3f;
   border-radius: 10px;
+  color: white;
   display: flex;
   flex-direction: column;
   height: 140px;
@@ -33,18 +29,26 @@
 
 .email {
   all: unset;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
+  color: white;
 }
 
 .password {
   all: unset;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
+  color: white;
 }
 
 .button {
-  background-color: rgb(234, 30, 99);
+  background-color: #157347;
   border-radius: 10px;
   width: 240px;
+  color: white;
+}
+
+.icons {
+  all: unset;
+  margin: 10px;
 }
 
 
@@ -63,8 +67,12 @@
 */
 
 .footer {
+  background-color: white;
   bottom: 0;
+  display: flex;
+  justify-content: space-around;
   position: fixed;
+  width: 100%;
 }
 
 .ingredient-checkbox:checked + * {

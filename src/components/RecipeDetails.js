@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import Copy from 'clipboard-copy';
 import RecipiesContext from '../context/RecipiesContext';
 import OneDrinkCard from './OneDrinkCard';
@@ -7,6 +8,8 @@ import OneFoodCard from './OneFoodCard';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style/recipeDetail.css';
 
 function RecipeDetails() {
   const [inProgress, setInProgress] = useState(false);
@@ -112,45 +115,50 @@ function RecipeDetails() {
   };
 
   return (
-    <div>
-      <h1>RECIPE SCREEN</h1>
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ handleShare }
-      >
-        <img src={ shareIcon } alt="" />
-      </button>
-      {linkCopiado && <h3>Link copied!</h3>}
-      <button
-        type="button"
-        data-testid="favorite-btn"
-        onClick={ handleFavorites }
-        src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon }
-      >
-        <img src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon } alt="" />
-      </button>
+    <div className="recipeDetails-container">
+      <div className="icons-container">
+        <button
+          className="icons"
+          type="button"
+          data-testid="share-btn"
+          onClick={ handleShare }
+        >
+          <img src={ shareIcon } alt="" />
+        </button>
+        {linkCopiado && <h3>Link copied!</h3>}
+        <button
+          className="icons"
+          type="button"
+          data-testid="favorite-btn"
+          onClick={ handleFavorites }
+          src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon }
+        >
+          <img src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon } alt="" />
+        </button>
+      </div>
+
       { history.location.pathname.split('/')[1] === 'meals'
         ? <OneFoodCard /> : <OneDrinkCard />}
 
       {inProgress ? (
-        <button
+        <Button
           className="fixed-bottom"
           type="button"
           data-testid="start-recipe-btn"
           onClick={ handleButton }
         >
           Start Recipe
-        </button>)
+        </Button>)
         : (
-          <button
+          <Button
             className="fixed-bottom"
+            variant="success"
             type="button"
             data-testid="start-recipe-btn"
             onClick={ handleButton }
           >
             Continue Recipe
-          </button>
+          </Button>
         )}
 
     </div>

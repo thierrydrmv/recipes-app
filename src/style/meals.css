@@ -1,0 +1,46 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;1,100&display=swap'); */
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+}
+
+.meal-buttons {
+  align-items: center;
+  border-radius: 100%;
+  color: white;
+  font-family: Epilogue , sans-serif;
+  font-size: small;
+  height: 50px;
+  margin: 5px;
+  width: 80px;
+}
+
+.card-container {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin-bottom: 65px;
+  margin-top: 15px;
+}
+
+.recipe-card {
+  align-items: center;
+  border: 2px solid lightgrey;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.63);
+  display: flex;
+  flex-direction: column;
+  font-family: Epilogue , sans-serif;
+  font-size: small;
+  height: 200px;
+  margin: 5px;
+  overflow: hidden;
+  text-align: center;
+  width: 150px;
+}
+
+.imagem {
+  width: 145px;
+}

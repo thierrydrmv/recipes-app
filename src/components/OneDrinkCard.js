@@ -2,14 +2,16 @@ import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipiesContext from '../context/RecipiesContext';
 import CarouselStructure from './CarouselStructure';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style/oneFoodCard.css';
 
 function OneDrinkCard() {
   const { renderOneFood, setRenderOneFood } = useContext(RecipiesContext);
   const history = useHistory();
-  const vinteEUm = 21;
-  const trintaECinco = 35;
-  const trintaESeis = 36;
-  const cinquentaEUm = 51;
+  const vinteEUm = 17;
+  const trintaECinco = 21;
+  const trintaESeis = 32;
+  const cinquentaEUm = 36;
   useEffect(() => {
     const fetchApiCocktail = async () => {
       const id = history.location.pathname.split('/')[2];
@@ -29,37 +31,46 @@ function OneDrinkCard() {
   return (
     <div>
       {renderOneFood?.map(({
-        idDrink, strDrinkThumb, strDrink, strInstructions, strAlcoholic,
+        idDrink, strDrinkThumb, strDrink, strInstructions,
         ingredientAndMeasureList,
       }) => (
         (
           <div key={ idDrink }>
-            <h1 data-testid="recipe-title">{strDrink}</h1>
+            <h1 className="recipeName" data-testid="recipe-title">{strDrink}</h1>
             <img
+              className="oneFoodImg"
               data-testid="recipe-photo"
               src={ strDrinkThumb }
               alt={ strDrink }
               width="150"
             />
-            <p data-testid="recipe-category">{strAlcoholic}</p>
-            {ingredientAndMeasureList.map(
-              ({ ingredient, measure }) => ingredient.map((i, index) => (
-                <div key={ `${index}-${i}` }>
-                  <p
-                    data-testid={ `${index}-ingredient-name-and-measure` }
+            <div className="text-center m-3">
+              <h5>Ingredients</h5>
+              {/* <p data-testid="recipe-category">{strAlcoholic}</p> */}
+            </div>
+            <div className="ingredients-container">
+              {ingredientAndMeasureList.map(
+                ({ ingredient, measure }) => ingredient.map((i, index) => (
+                  <div
+                    key={ `${index}-${i}` }
                   >
-                    {i}
-                  </p>
-                  <p
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    {measure[index]}
-                  </p>
-                </div>
-              )),
-            )}
-            <p data-testid="instructions">{strInstructions}</p>
-            <h2>Recomendações</h2>
+                    <p
+                      className="ingredients"
+                      data-testid={ `${index}-ingredient-name-and-measure` }
+                    >
+                      {`${i} ${measure[index]}`}
+                    </p>
+                  </div>
+                )),
+              )}
+            </div>
+            <div className="m-3">
+              <p data-testid="instructions">{strInstructions}</p>
+            </div>
+            <div className="text-center m-3">
+              <h5>Recommendations</h5>
+              {/* <p data-testid="recipe-category">{strCategory}</p> */}
+            </div>
             <CarouselStructure />
           </div>
         )

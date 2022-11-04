@@ -11,7 +11,6 @@ export default function RecipeInProgress() {
   const url = history.location.pathname.split('/');
   const [linkCopiado, setLinkCopiado] = useState(false);
   const [favoriteIcon, setFavoriteIcon] = useState(false);
-  // ['','meals','503014','in-progress'];
   const { renderOneFood, setRenderOneFood,
     checkBox, setCheckBox } = useContext(RecipiesContext);
 
@@ -91,8 +90,7 @@ export default function RecipeInProgress() {
     return;
   }
   const { ingredientsAndMeasureList, strMeal,
-    strMealThumb, strInstructions, strCategory } = renderOneFood;
-  const { strDrink,
+    strMealThumb, strInstructions, strDrink,
     strDrinkThumb, strAlcoholic } = renderOneFood;
   const { ingredient } = ingredientsAndMeasureList;
   console.log(renderOneFood);
@@ -140,45 +138,54 @@ export default function RecipeInProgress() {
     <section>
       {url[1] === 'meals' ? (
         <div>
-          <h3 data-testid="recipe-title">{strMeal}</h3>
+          <div className="text-center">
+            <button
+              className="icons"
+              type="button"
+              data-testid="share-btn"
+              onClick={ handleShare }
+            >
+              <img src={ shareIcon } alt="" />
+            </button>
+            {linkCopiado && <h3>Link copied!</h3>}
+            <button
+              className="icons"
+              type="button"
+              data-testid="favorite-btn"
+              onClick={ handleFavorites }
+              src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon }
+            >
+              <img src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon } alt="" />
+            </button>
+            <h3 data-testid="recipe-title">{strMeal}</h3>
+          </div>
           <img
             data-testid="recipe-photo"
             src={ strMealThumb }
             alt={ strMealThumb }
+            width="360"
           />
-          {ingredient?.map((element, index) => (
-            <label
-              key={ element }
-              htmlFor="ingredients"
-              data-testid={ `${index}-ingredient-step` }
-            >
-              <input
-                onChange={ () => handleCheckBox(index) }
-                className="ingredient-checkbox"
-                checked={ checkBox[index] }
-                type="checkbox"
-              />
-              <span>{element}</span>
-            </label>
-          ))}
-          <button
-            type="button"
-            data-testid="share-btn"
-            onClick={ handleShare }
-          >
-            <img src={ shareIcon } alt="" />
-          </button>
-          {linkCopiado && <h3>Link copied!</h3>}
-          <button
-            type="button"
-            data-testid="favorite-btn"
-            onClick={ handleFavorites }
-            src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon }
-          >
-            <img src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon } alt="" />
-          </button>
-          <h4 data-testid="recipe-category">{strCategory}</h4>
-          <p data-testid="instructions">{strInstructions}</p>
+          <div className="text-center m-3">
+            <h5>Ingredients</h5>
+          </div>
+          <div className="m-3">
+            {ingredient?.map((element, index) => (
+              <label
+                key={ element }
+                htmlFor="ingredients"
+                data-testid={ `${index}-ingredient-step` }
+              >
+                <input
+                  onChange={ () => handleCheckBox(index) }
+                  className="ingredient-checkbox"
+                  checked={ checkBox[index] }
+                  type="checkbox"
+                />
+                <span>{element}</span>
+              </label>
+            ))}
+            <p data-testid="instructions">{strInstructions}</p>
+          </div>
           <button
             disabled={ !checkBox.every((check) => check === true) }
             type="button"
@@ -211,11 +218,7 @@ export default function RecipeInProgress() {
               <span>{element}</span>
             </label>
           ))}
-          <button
-            type="button"
-            data-testid="share-btn"
-            onClick={ handleShare }
-          >
+          <button type="button" data-testid="share-btn" onClick={ handleShare }>
             <img src={ shareIcon } alt="" />
           </button>
           {linkCopiado && <h3>Link copied!</h3>}
@@ -230,6 +233,8 @@ export default function RecipeInProgress() {
           <h4 data-testid="recipe-category">{strAlcoholic}</h4>
           <p data-testid="instructions">{strInstructions}</p>
           <button
+            className="fixed-bottom"
+            variant="success"
             disabled={ !checkBox.every((check) => check === true) }
             type="button"
             data-testid="finish-recipe-btn"

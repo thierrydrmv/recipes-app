@@ -1,0 +1,18 @@
+.recipeName {
+  text-align: center;
+}
+
+.oneFoodImg {
+  width: 360px;
+}
+
+.ingredients-container {
+  border: 1px solid black;
+  border-radius: 5%;
+  margin: 17px;
+  width: 90%;
+}
+
+.ingredients {
+  margin: 10px;
+}
