@@ -16,10 +16,16 @@ export default function Footer() {
 
   return (
     <section data-testid="footer" className="footer">
-      <button type="button" onClick={ () => handleClick('drinks') }>
+      <button
+        className="icons"
+        type="button"
+        onClick={ () => handleClick('drinks') }>
         <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="drinks" />
       </button>
-      <button type="button" onClick={ () => handleClick('meals') }>
+      <button
+        className="icons"
+        type="button"
+        onClick={ () => handleClick('meals') }>
         <img data-testid="meals-bottom-btn" src={ mealIcon } alt="meals" />
       </button>
     </section>

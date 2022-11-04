@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import RecipiesContext from '../context/RecipiesContext';
 import Header from './Header';
 import Footer from './Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style/meals.css';
 
 function Meals() {
   const {
@@ -67,9 +70,11 @@ function Meals() {
   return (
     <div>
       <Header />
+      <div className="button-container text-center">
       { mealcatBool
       && mealcat?.map((categoryName, index) => (
         <button
+          className="btn btn-success m-1"
           key={ `${categoryName}-${index}` }
           data-testid={ `{${categoryName}-category-filter}` }
           type="button"
@@ -78,34 +83,44 @@ function Meals() {
           { categoryName }
         </button>
       ))}
-      { meale ? meat.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
-        index < size && (
-          <div data-testid={ `${index}-recipe-card` } key={ idMeal }>
-            <p data-testid={ `${index}-card-name` }>{strMeal}</p>
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ strMealThumb }
-              alt={ idMeal }
-            />
-          </div>
-        )
-      )) : (
-        meals.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
+      </div>
+      <div className="card-container">
+        { meale ? meat.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
           index < size && (
             <div
+              className="recipe-card"
               data-testid={ `${index}-recipe-card` }
-              key={ idMeal }
-            >
-              <p data-testid={ `${index}-card-name` }>{strMeal}</p>
+              key={ idMeal }>
               <img
+                className="imagem"
                 data-testid={ `${index}-card-img` }
                 src={ strMealThumb }
                 alt={ idMeal }
               />
+              <p data-testid={ `${index}-card-name` }>{strMeal}</p>
             </div>
           )
-        )))}
-      <Footer />
+        )) : (
+          meals.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
+            index < size && (
+              <div
+                className="recipe-card"
+                data-testid={ `${index}-recipe-card` }
+                key={ idMeal }
+              >
+                <img
+                  className="imagem"
+                  data-testid={ `${index}-card-img` }
+                  src={ strMealThumb }
+                  alt={ idMeal }
+                />
+                <p data-testid={ `${index}-card-name` }>{strMeal}</p>
+              </div>
+            )
+          )))}
+        </div>
+      
+        <Footer />
     </div>
   );
 }

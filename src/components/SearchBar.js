@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import RecipiesContext from '../context/RecipiesContext';
 
 function SearchBar() {
@@ -81,56 +82,68 @@ function SearchBar() {
     setsearch({ searchType, searchText });
   };
   return (
-    <>
+    <div className="pb-2 mb-4 border-bottom border-secondary ">
+      <div  className="input-group input-group-sm mb-3">
       <input
-        type="text"
-        placeholder="Search"
-        data-testid="search-input"
-        name="search"
-        value={ searchText }
-        onChange={ (event) => setsearchText(event.target.value) }
-      />
-      <label htmlFor="ingredient-search">
-        <input
-          name="searchType"
-          data-testid="ingredient-search-radio"
-          type="radio"
-          id="ingredient-search"
-          value="Ingredient"
-          onChange={ (event) => setsearchType(event.target.value) }
-        />
-        Ingredient
-      </label>
-      <label htmlFor="name-search">
-        <input
-          name="searchType"
-          data-testid="name-search-radio"
-          type="radio"
-          id="name-search"
-          value="Name"
-          onChange={ (event) => setsearchType(event.target.value) }
-        />
-        Name
-      </label>
-      <label htmlFor="first-letter-search">
-        <input
-          name="searchType"
-          data-testid="first-letter-search-radio"
-          type="radio"
-          id="first-letter-search"
-          value="First letter"
-          onChange={ (event) => setsearchType(event.target.value) }
-        />
-        First letter
-      </label>
-      <button
-        type="button"
-        data-testid="exec-search-btn"
-        onClick={ () => { handleSearch(); } }
-      >
-        Pesquisar
-      </button>
-    </>
+            className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+            type="text"
+            placeholder="Search"
+            data-testid="search-input"
+            name="search"
+            value={ searchText }
+            onChange={ (event) => setsearchText(event.target.value) }
+          /> 
+      </div>
+      <div className='d-flex justify-content-around' >
+        <label htmlFor="ingredient-search"> 
+          <input
+            className="form-check-input radio-btn"
+            name="searchType"
+            data-testid="ingredient-search-radio"
+            type="radio"
+            id="ingredient-search"
+            value="Ingredient"
+            onChange={ (event) => setsearchType(event.target.value) }
+          />
+          Ingredient
+        </label>
+        <label htmlFor="name-search">
+          <input
+            className="form-check-input radio-btn"
+            name="searchType"
+            data-testid="name-search-radio"
+            type="radio"
+            id="name-search"
+            value="Name"
+            onChange={ (event) => setsearchType(event.target.value) }
+          />
+          Name
+        </label>
+        <label htmlFor="first-letter-search">
+          <input
+            className="form-check-input radio-btn"
+            name="searchType"
+            data-testid="first-letter-search-radio"
+            type="radio"
+            id="first-letter-search"
+            value="First letter"
+            onChange={ (event) => setsearchType(event.target.value) }
+          />
+          First letter
+        </label>
+      </div>
+      <div className="text-center m-3">
+        <button
+          className="btn btn-success"
+          variant="success"
+          type="button"
+          data-testid="exec-search-btn"
+          onClick={ () => { handleSearch(); } }
+        >
+          Pesquisar
+        </button>
+      </div>
+    </div>
   );
 }
 export default SearchBar;

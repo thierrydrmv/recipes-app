@@ -12,11 +12,6 @@
   justify-content: center;
 }
 
-.imagem {
-  filter: blur(2px);
-  height: 100vh;
-}
-
 .meals {
   z-index: 2;
 }
@@ -47,6 +42,11 @@
   width: 240px;
 }
 
+.icons {
+  all: unset;
+  margin: 10px;
+}
+
 
 /*
 #iceLeft {
@@ -63,8 +63,12 @@
 */
 
 .footer {
+  background-color: white;
   bottom: 0;
+  display: flex;
+  justify-content: space-around;
   position: fixed;
+  width: 100%;
 }
 
 .ingredient-checkbox:checked + * {
