@@ -11,7 +11,6 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/recipeDetail.css';
 
-
 function RecipeDetails() {
   const [inProgress, setInProgress] = useState(false);
   const [linkCopiado, setLinkCopiado] = useState(false);
