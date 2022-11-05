@@ -53,10 +53,6 @@ function FavoriteRecipes() {
   const handleClick = (pathName) => {
     history.push(`/${pathName}`);
   };
-
-  const handleClick = (pathName) => {
-    history.push(`/${pathName}`);
-  };
   return (
     <section className="favRecipes-container">
       <button
