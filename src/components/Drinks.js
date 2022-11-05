@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import { useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import RecipiesContext from '../context/RecipiesContext';
 import Header from './Header';
 import Footer from './Footer';
+import FilterButtons from './FilterButtons';
 
 function Drinks() {
   const {
@@ -12,18 +13,20 @@ function Drinks() {
     redirect,
     meals,
     setMeat,
-    drincat,
-    setDrincat,
     meat,
     drinke,
     setRedirect,
-    setDrinke } = useContext(RecipiesContext);
+    setDrinke,
+    setBackupMeat,
+  } = useContext(RecipiesContext);
   const history = useHistory();
+
   useEffect(() => {
     const requestAPI = async () => {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
       const data = await response.json();
       setMeat(data);
+      setBackupMeat(data);
       setDrinke(true);
     };
     requestAPI();
@@ -35,53 +38,17 @@ function Drinks() {
     if (redirect) {
       history.push(redirect);
       setRedirect('');
-    } // toda vez que o meu redirect for atualizado vai acontecer a mudança de pagina
+    }
   }, [history, redirect, setPageTitle, setRoute, setDrinke]);
   const size = 12;
-  useEffect(() => {
-    const fetchDrink = async () => {
-      const five = 6;
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
-      const data = await response.json();
-      const newData = data.drinks.splice(0, five);
-      const category = newData
-        .map((item) => (item.strCategory));
-      setDrincat(category);
-    };
-    fetchDrink();
-  }, []);
-  const handleCategory = async (category) => {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
-    const data = await response.json();
-    setMeat(data);
-  };
+
   return (
     <div>
       <Header />
-      { drincat?.map((categoryName, index) => (
-        <button
-          key={ `${categoryName}-${index}` }
-          data-testid={ `{${categoryName}-category-filter}` }
-          type="button"
-          onClick={ () => handleCategory(categoryName) }
-        >
-          { categoryName }
-        </button>
-      ))}
+      <FilterButtons />
       {drinke ? meat.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
         index < size && (
-          <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
-            <p data-testid={ `${index}-card-name` }>{strDrink}</p>
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ strDrinkThumb }
-              alt={ idDrink }
-            />
-          </div>
-        )
-      )) : (
-        meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-          index < size && (
+          <Link to={ `${history.location.pathname}/${idDrink}` }>
             <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
               <p data-testid={ `${index}-card-name` }>{strDrink}</p>
               <img
@@ -90,6 +57,21 @@ function Drinks() {
                 alt={ idDrink }
               />
             </div>
+          </Link>
+        )
+      )) : (
+        meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+          index < size && (
+            <Link to={ `${history.location.pathname}/${idDrink}` }>
+              <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
+                <p data-testid={ `${index}-card-name` }>{strDrink}</p>
+                <img
+                  data-testid={ `${index}-card-img` }
+                  src={ strDrinkThumb }
+                  alt={ idDrink }
+                />
+              </div>
+            </Link>
           )
         )))}
       <Footer />

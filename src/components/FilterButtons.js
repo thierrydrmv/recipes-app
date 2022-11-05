@@ -1,0 +1,69 @@
+import { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import RecipiesContext from '../context/RecipiesContext';
+
+function FilterButtons() {
+  const { setMeat, backupMeat, meat } = useContext(RecipiesContext);
+  const [categories, setCategories] = useState(['All']);
+  const history = useHistory();
+  const url = history.location.pathname.split('/');
+  const five = 5;
+
+  useEffect(() => {
+    const fetchDrink = async () => {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+      const data = await response.json();
+      const newData = data.drinks.splice(0, five);
+      const allCategories = newData
+        .map((item) => (item.strCategory));
+      setCategories([...categories, ...allCategories]);
+    };
+    const fetchMeal = async () => {
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+      const data = await response.json();
+      const newData = data.meals.splice(0, five);
+      const allCategories = newData
+        .map((item) => (item.strCategory));
+      setCategories([...categories, ...allCategories]);
+    };
+    if (url[1] === 'drinks') {
+      fetchDrink();
+    } else {
+      fetchMeal();
+    }
+  }, []);
+
+  const handleCategory = async (category) => {
+    if (category === 'All' || meat !== backupMeat) {
+      return setMeat(backupMeat);
+    }
+    if (url[1] === 'drinks') {
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+      const data = await response.json();
+      setMeat(data);
+    } else {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+      const data = await response.json();
+      setMeat(data);
+    }
+  };
+
+  console.log(categories);
+
+  return (
+    <div>
+      {categories.map((categoryName, index) => (
+        <button
+          key={ `${categoryName}-${index}` }
+          data-testid={ `${categoryName}-category-filter` }
+          type="button"
+          onClick={ () => handleCategory(categoryName) }
+        >
+          { categoryName }
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default FilterButtons;

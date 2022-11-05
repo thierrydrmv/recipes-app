@@ -11,6 +11,7 @@ export default function RecipeInProgress() {
   const url = history.location.pathname.split('/');
   const [linkCopiado, setLinkCopiado] = useState(false);
   const [favoriteIcon, setFavoriteIcon] = useState(false);
+  const [ingredientsSize, setIngredientsSize] = useState();
   // ['','meals','503014','in-progress'];
   const { renderOneFood, setRenderOneFood,
     checkBox, setCheckBox } = useContext(RecipiesContext);
@@ -42,7 +43,7 @@ export default function RecipeInProgress() {
         ingredient: Object.values(recipe).slice(nove, vinteENove)
           .filter((value) => value !== null && value !== '') };
       setRenderOneFood(recipe);
-      return recipe.ingredientsAndMeasureList.ingredient;
+      setIngredientsSize(recipe.ingredientsAndMeasureList.ingredient.length);
     };
     const fetchApiCocktail = async () => {
       const endPoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${url[2]}`;
@@ -53,20 +54,19 @@ export default function RecipeInProgress() {
         ingredient: Object.values(recipe).slice(vinteEUm, trintaECinco)
           .filter((value) => value !== null && value !== '') };
       setRenderOneFood(recipe);
-      return recipe.ingredientsAndMeasureList.ingredient;
+      setIngredientsSize(recipe.ingredientsAndMeasureList.ingredient.length);
     };
     if (url[1] === 'meals') {
-      const ingredients = fetchApiMeal();
-      const prev = localStorage.getItem('inProgressRecipes');
-      const previous = prev ? JSON.parse(prev)[url[1]][url[2]] : '';
-      setCheckBox(previous || Array(ingredients.length).fill(false));
+      fetchApiMeal();
     } else {
-      const ingredients = fetchApiCocktail();
-      const prev = localStorage.getItem('inProgressRecipes');
-      const previous = prev ? JSON.parse(prev)[url[1]][url[2]] : '';
-      setCheckBox(previous || Array(ingredients.length).fill(false));
+      fetchApiCocktail();
     }
   }, []);
+  useEffect(() => {
+    const prev = localStorage.getItem('inProgressRecipes');
+    const previous = prev ? JSON.parse(prev)[url[1]][url[2]] : '';
+    setCheckBox(previous || Array(ingredientsSize).fill(false));
+  }, [ingredientsSize]);
   const saveLocalStorage = (status) => {
     const prev = JSON.parse(localStorage.getItem('inProgressRecipes'))
     || { [url[1]]: { [url[2]]: [...status] } };
@@ -95,7 +95,6 @@ export default function RecipeInProgress() {
   const { strDrink,
     strDrinkThumb, strAlcoholic } = renderOneFood;
   const { ingredient } = ingredientsAndMeasureList;
-  console.log(renderOneFood);
   const handleFavorites = () => {
     const favorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (url[1] === 'meals') {
@@ -134,7 +133,7 @@ export default function RecipeInProgress() {
   };
   const handleShare = () => {
     setLinkCopiado(true);
-    Copy(`http://localhost:3000${history.location.pathname}`);
+    Copy(`http://localhost:3000/${url[1]}/${url[2]}`);
   };
   return (
     <section>
@@ -158,7 +157,7 @@ export default function RecipeInProgress() {
                 checked={ checkBox[index] }
                 type="checkbox"
               />
-              <span>{element}</span>
+              <p>{element}</p>
             </label>
           ))}
           <button
@@ -197,19 +196,19 @@ export default function RecipeInProgress() {
             alt={ strDrinkThumb }
           />
           {ingredient?.map((element, index) => (
-            <label
-              key={ element }
-              htmlFor="ingredient"
-              data-testid={ `${index}-ingredient-step` }
-            >
-              <input
-                onChange={ () => handleCheckBox(index) }
-                className="ingredient-checkbox"
-                checked={ checkBox[index] }
-                type="checkbox"
-              />
-              <span>{element}</span>
-            </label>
+            <div className="text-dark" key={ element }>
+              <label
+                htmlFor="ingredient"
+                data-testid={ `${index}-ingredient-step` }
+              >
+                <input
+                  onChange={ () => handleCheckBox(index) }
+                  checked={ checkBox[index] }
+                  type="checkbox"
+                />
+                <p>{element}</p>
+              </label>
+            </div>
           ))}
           <button
             type="button"
