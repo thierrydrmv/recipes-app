@@ -199,7 +199,7 @@ export default function RecipeInProgress() {
           </button>
           <h4 data-testid="recipe-category">{strCategory}</h4>
           <p data-testid="instructions">{strInstructions}</p>
-          <button
+          <Button
             disabled={ !checkBox.every((check) => check === true) }
             type="button"
             data-testid="finish-recipe-btn"
