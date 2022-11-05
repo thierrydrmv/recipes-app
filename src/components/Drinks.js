@@ -77,26 +77,7 @@ function Drinks() {
               </div>
             </Link>
           )
-        )) : (
-          meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-            index < size && (
-              <div
-                className="recipe-card"
-                data-testid={ `${index}-recipe-card` }
-                key={ idDrink }
-              >
-                <img
-                  className="imagem"
-                  data-testid={ `${index}-card-img` }
-                  src={ strDrinkThumb }
-                  alt={ idDrink }
-                />
-                <p data-testid={ `${index}-card-name` }>{strDrink}</p>
-              </div>
-            )
-          )))}
-      </div>
-
+        )))}
       <Footer />
     </div>
   );
