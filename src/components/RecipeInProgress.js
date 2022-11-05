@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import Copy from 'clipboard-copy';
 import RecipiesContext from '../context/RecipiesContext';
 import shareIcon from '../images/shareIcon.svg';
@@ -92,7 +91,8 @@ export default function RecipeInProgress() {
     return;
   }
   const { ingredientsAndMeasureList, strMeal,
-    strMealThumb, strInstructions, strDrink,
+    strMealThumb, strInstructions, strCategory } = renderOneFood;
+  const { strDrink,
     strDrinkThumb, strAlcoholic } = renderOneFood;
   const { ingredient } = ingredientsAndMeasureList;
   const handleFavorites = () => {
@@ -139,32 +139,11 @@ export default function RecipeInProgress() {
     <section>
       {url[1] === 'meals' ? (
         <div>
-          <div className="text-center">
-            <button
-              className="icons"
-              type="button"
-              data-testid="share-btn"
-              onClick={ handleShare }
-            >
-              <img src={ shareIcon } alt="" />
-            </button>
-            {linkCopiado && <h3>Link copied!</h3>}
-            <button
-              className="icons"
-              type="button"
-              data-testid="favorite-btn"
-              onClick={ handleFavorites }
-              src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon }
-            >
-              <img src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon } alt="" />
-            </button>
-            <h3 data-testid="recipe-title">{strMeal}</h3>
-          </div>
+          <h3 data-testid="recipe-title">{strMeal}</h3>
           <img
             data-testid="recipe-photo"
             src={ strMealThumb }
             alt={ strMealThumb }
-            width="360"
           />
           {ingredient?.map((element, index) => (
             <label
@@ -199,16 +178,14 @@ export default function RecipeInProgress() {
           </button>
           <h4 data-testid="recipe-category">{strCategory}</h4>
           <p data-testid="instructions">{strInstructions}</p>
-          <Button
+          <button
             disabled={ !checkBox.every((check) => check === true) }
             type="button"
             data-testid="finish-recipe-btn"
             onClick={ handleClick }
-            className="fixed-bottom"
-            variant="success"
           >
             Finish Recipe
-          </Button>
+          </button>
         </div>
       ) : (
         <div>
@@ -233,7 +210,11 @@ export default function RecipeInProgress() {
               </label>
             </div>
           ))}
-          <button type="button" data-testid="share-btn" onClick={ handleShare }>
+          <button
+            type="button"
+            data-testid="share-btn"
+            onClick={ handleShare }
+          >
             <img src={ shareIcon } alt="" />
           </button>
           {linkCopiado && <h3>Link copied!</h3>}
@@ -248,8 +229,6 @@ export default function RecipeInProgress() {
           <h4 data-testid="recipe-category">{strAlcoholic}</h4>
           <p data-testid="instructions">{strInstructions}</p>
           <button
-            className="fixed-bottom"
-            variant="success"
             disabled={ !checkBox.every((check) => check === true) }
             type="button"
             data-testid="finish-recipe-btn"
