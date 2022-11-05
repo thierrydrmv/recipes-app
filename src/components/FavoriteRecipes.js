@@ -54,7 +54,6 @@ function FavoriteRecipes() {
     history.push(`/${pathName}`);
   };
 
-  const history = useHistory();
   const handleClick = (pathName) => {
     history.push(`/${pathName}`);
   };
