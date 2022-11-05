@@ -80,7 +80,6 @@ function DoneRecipes() {
               />
             </a>
             <section className="card-container">
-              <div>
                 <div className="nameToCategory">
                   <a href={ `/${recipe.type}s/${recipe.id}` }>
                     <p
@@ -99,9 +98,7 @@ function DoneRecipes() {
                     Data :
                     {recipe.doneDate}
                   </p>
-
                 </div>
-              </div>
               <br />
               <div className="icons text-center">
                 <button
