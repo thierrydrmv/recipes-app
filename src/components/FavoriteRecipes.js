@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import copy from 'clipboard-copy';
 import profileIcon from '../images/profileIcon.svg';
@@ -54,11 +54,16 @@ function FavoriteRecipes() {
     history.push(`/${pathName}`);
   };
 
+  const history = useHistory();
+  const handleClick = (pathName) => {
+    history.push(`/${pathName}`);
+  };
   return (
     <section className="favRecipes-container">
       <button
         type="button"
         onClick={ () => { handleClick('profile'); } }
+        className="icons"
       >
         <img
           data-testid="profile-top-btn"

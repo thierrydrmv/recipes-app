@@ -7,31 +7,31 @@ import ContextProvider from './context/ContextProvider';
 // -----------------------------------------------------------------------------------
 // setando manual valor do localstore para desenolvimento da tela de receitas feitas
 // depois que for implementado requisito 43 de ser retidado
-/* const EnviadoneRecipes = [
+const EnviadoneRecipes = [
   {
-    id: '52771',
+    id: '53065',
     type: 'meal',
-    nationality: 'Italian',
-    category: 'Vegetarian',
+    nationality: 'Japanese',
+    category: 'Seafood',
     alcoholicOrNot: '',
-    name: 'Spicy Arrabiata Penne',
-    image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    doneDate: '23/06/2020',
-    tags: ['Pasta', 'Curry'],
-  },
-  {
-    id: '178319',
-    type: 'drink',
-    nationality: '',
-    category: 'Cocktail',
-    alcoholicOrNot: 'Alcoholic',
-    name: 'Aquamarine',
-    image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+    name: 'Sushi',
+    image: 'https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg',
     doneDate: '23/06/2020',
     tags: [],
   },
+  {
+    id: '53013',
+    type: 'meal',
+    nationality: 'American',
+    category: 'Beef',
+    alcoholicOrNot: '',
+    name: 'Big Mac',
+    image: 'https://www.themealdb.com/images/media/meals/urzj1d1587670726.jpg',
+    doneDate: '30/07/2020',
+    tags: [],
+  },
 ];
-localStorage.setItem('doneRecipes', JSON.stringify(EnviadoneRecipes)); */
+localStorage.setItem('EnviadoneRecipes', JSON.stringify(EnviadoneRecipes));
 // -----------------------------------------------------------------------------------
 
 ReactDOM

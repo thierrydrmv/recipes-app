@@ -5,6 +5,8 @@ import RecipiesContext from '../context/RecipiesContext';
 import Header from './Header';
 import Footer from './Footer';
 import FilterButtons from './FilterButtons';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style/drinks.css';
 
 function Drinks() {
   const {
@@ -52,10 +54,12 @@ function Drinks() {
             <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
               <p data-testid={ `${index}-card-name` }>{strDrink}</p>
               <img
+                className="imagem"
                 data-testid={ `${index}-card-img` }
                 src={ strDrinkThumb }
                 alt={ idDrink }
               />
+              <p data-testid={ `${index}-card-name` }>{strDrink}</p>
             </div>
           </Link>
         )
@@ -73,7 +77,26 @@ function Drinks() {
               </div>
             </Link>
           )
-        )))}
+        )) : (
+          meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+            index < size && (
+              <div
+                className="recipe-card"
+                data-testid={ `${index}-recipe-card` }
+                key={ idDrink }
+              >
+                <img
+                  className="imagem"
+                  data-testid={ `${index}-card-img` }
+                  src={ strDrinkThumb }
+                  alt={ idDrink }
+                />
+                <p data-testid={ `${index}-card-name` }>{strDrink}</p>
+              </div>
+            )
+          )))}
+      </div>
+
       <Footer />
     </div>
   );
