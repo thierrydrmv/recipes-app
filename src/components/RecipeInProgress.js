@@ -12,10 +12,10 @@ export default function RecipeInProgress() {
   const [linkCopiado, setLinkCopiado] = useState(false);
   const [favoriteIcon, setFavoriteIcon] = useState(false);
   const [ingredientsSize, setIngredientsSize] = useState();
+  const [ingredientsList, setIngredientsList] = useState([]);
   // ['','meals','503014','in-progress'];
   const { renderOneFood, setRenderOneFood,
     checkBox, setCheckBox } = useContext(RecipiesContext);
-
   useEffect(() => {
     const urlId = history.location.pathname.split('/')[2];
     const favorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -43,6 +43,7 @@ export default function RecipeInProgress() {
         ingredient: Object.values(recipe).slice(nove, vinteENove)
           .filter((value) => value !== null && value !== '') };
       setRenderOneFood(recipe);
+      setIngredientsList(recipe.ingredientsAndMeasureList.ingredient);
       setIngredientsSize(recipe.ingredientsAndMeasureList.ingredient.length);
     };
     const fetchApiCocktail = async () => {
@@ -54,6 +55,7 @@ export default function RecipeInProgress() {
         ingredient: Object.values(recipe).slice(vinteEUm, trintaECinco)
           .filter((value) => value !== null && value !== '') };
       setRenderOneFood(recipe);
+      setIngredientsList(recipe.ingredientsAndMeasureList.ingredient);
       setIngredientsSize(recipe.ingredientsAndMeasureList.ingredient.length);
     };
     if (url[1] === 'meals') {
@@ -90,11 +92,6 @@ export default function RecipeInProgress() {
   if (renderOneFood.length === 0) {
     return;
   }
-  const { ingredientsAndMeasureList, strMeal,
-    strMealThumb, strInstructions, strCategory } = renderOneFood;
-  const { strDrink,
-    strDrinkThumb, strAlcoholic } = renderOneFood;
-  const { ingredient } = ingredientsAndMeasureList;
   const handleFavorites = () => {
     const favorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (url[1] === 'meals') {
@@ -137,107 +134,116 @@ export default function RecipeInProgress() {
   };
   return (
     <section>
-      {url[1] === 'meals' ? (
-        <div>
-          <h3 data-testid="recipe-title">{strMeal}</h3>
-          <img
-            data-testid="recipe-photo"
-            src={ strMealThumb }
-            alt={ strMealThumb }
-          />
-          {ingredient?.map((element, index) => (
-            <label
-              key={ element }
-              htmlFor="ingredients"
-              data-testid={ `${index}-ingredient-step` }
-            >
-              <input
-                onChange={ () => handleCheckBox(index) }
-                className="ingredient-checkbox"
-                checked={ checkBox[index] }
-                type="checkbox"
-              />
-              <p>{element}</p>
-            </label>
-          ))}
-          <button
-            type="button"
-            data-testid="share-btn"
-            onClick={ handleShare }
-          >
-            <img src={ shareIcon } alt="" />
-          </button>
-          {linkCopiado && <h3>Link copied!</h3>}
-          <button
-            type="button"
-            data-testid="favorite-btn"
-            onClick={ handleFavorites }
-            src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon }
-          >
-            <img src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon } alt="" />
-          </button>
-          <h4 data-testid="recipe-category">{strCategory}</h4>
-          <p data-testid="instructions">{strInstructions}</p>
-          <button
-            disabled={ !checkBox.every((check) => check === true) }
-            type="button"
-            data-testid="finish-recipe-btn"
-            onClick={ handleClick }
-          >
-            Finish Recipe
-          </button>
-        </div>
-      ) : (
-        <div>
-          <h3 data-testid="recipe-title">{strDrink}</h3>
-          <img
-            data-testid="recipe-photo"
-            src={ strDrinkThumb }
-            alt={ strDrinkThumb }
-          />
-          {ingredient?.map((element, index) => (
-            <div className="text-dark" key={ element }>
-              <label
-                htmlFor="ingredient"
-                data-testid={ `${index}-ingredient-step` }
-              >
-                <input
-                  onChange={ () => handleCheckBox(index) }
-                  checked={ checkBox[index] }
-                  type="checkbox"
+      {
+        url[1] === 'meals' ? (
+          [renderOneFood]?.map(({ strMeal,
+            strMealThumb, strInstructions, strCategory }) => (
+            (
+              <div key={ strMeal }>
+                <h3 data-testid="recipe-title">{strMeal}</h3>
+                <img
+                  data-testid="recipe-photo"
+                  src={ strMealThumb }
+                  alt={ strMealThumb }
                 />
-                <p>{element}</p>
-              </label>
-            </div>
-          ))}
-          <button
-            type="button"
-            data-testid="share-btn"
-            onClick={ handleShare }
-          >
-            <img src={ shareIcon } alt="" />
-          </button>
-          {linkCopiado && <h3>Link copied!</h3>}
-          <button
-            type="button"
-            data-testid="favorite-btn"
-            onClick={ handleFavorites }
-            src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon }
-          >
-            <img src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon } alt="" />
-          </button>
-          <h4 data-testid="recipe-category">{strAlcoholic}</h4>
-          <p data-testid="instructions">{strInstructions}</p>
-          <button
-            disabled={ !checkBox.every((check) => check === true) }
-            type="button"
-            data-testid="finish-recipe-btn"
-            onClick={ handleClick }
-          >
-            Finish Recipe
-          </button>
-        </div>
-      )}
+                {ingredientsList.map((element, index) => (
+                  <label
+                    key={ element }
+                    htmlFor="ingredients"
+                    data-testid={ `${index}-ingredient-step` }
+                  >
+                    <input
+                      onChange={ () => handleCheckBox(index) }
+                      className="ingredient-checkbox"
+                      checked={ checkBox[index] }
+                      type="checkbox"
+                    />
+                    <p>{element}</p>
+                  </label>
+                ))}
+                <button
+                  type="button"
+                  data-testid="share-btn"
+                  onClick={ handleShare }
+                >
+                  <img src={ shareIcon } alt="" />
+                </button>
+                {linkCopiado && <h3>Link copied!</h3>}
+                <button
+                  type="button"
+                  data-testid="favorite-btn"
+                  onClick={ handleFavorites }
+                  src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon }
+                >
+                  <img src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon } alt="" />
+                </button>
+                <h4 data-testid="recipe-category">{strCategory}</h4>
+                <p data-testid="instructions">{strInstructions}</p>
+                <button
+                  disabled={ !checkBox.every((check) => check === true) }
+                  type="button"
+                  data-testid="finish-recipe-btn"
+                  onClick={ handleClick }
+                >
+                  Finish Recipe
+                </button>
+              </div>
+            )))
+        ) : (
+          [renderOneFood]?.map(({ strInstructions, strDrink,
+            strDrinkThumb, strAlcoholic }) => (
+            (
+              <div key={ strDrink }>
+                <h3 data-testid="recipe-title">{strDrink}</h3>
+                <img
+                  data-testid="recipe-photo"
+                  src={ strDrinkThumb }
+                  alt={ strDrinkThumb }
+                />
+                {ingredientsList?.map((element, index) => (
+                  <div className="text-dark" key={ element }>
+                    <label
+                      htmlFor="ingredient"
+                      data-testid={ `${index}-ingredient-step` }
+                    >
+                      <input
+                        onChange={ () => handleCheckBox(index) }
+                        checked={ checkBox[index] }
+                        type="checkbox"
+                      />
+                      <p>{element}</p>
+                    </label>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  data-testid="share-btn"
+                  onClick={ handleShare }
+                >
+                  <img src={ shareIcon } alt="" />
+                </button>
+                {linkCopiado && <h3>Link copied!</h3>}
+                <button
+                  type="button"
+                  data-testid="favorite-btn"
+                  onClick={ handleFavorites }
+                  src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon }
+                >
+                  <img src={ favoriteIcon ? blackHeartIcon : whiteHeartIcon } alt="" />
+                </button>
+                <h4 data-testid="recipe-category">{strAlcoholic}</h4>
+                <p data-testid="instructions">{strInstructions}</p>
+                <button
+                  disabled={ !checkBox.every((check) => check === true) }
+                  type="button"
+                  data-testid="finish-recipe-btn"
+                  onClick={ handleClick }
+                >
+                  Finish Recipe
+                </button>
+              </div>)
+          )))
+      }
     </section>
   );
 }
