@@ -50,7 +50,7 @@ function Meals() {
       { meale ? meat.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
         index < size && (
           <Link to={ `${history.location.pathname}/${idMeal}` }>
-            <div data-testid={ `${index}-recipe-card` } key={ idMeal }>
+            <div data-testid={ `${index}-recipe-card` } key={ `${idMeal}-${index}` }>
               <p data-testid={ `${index}-card-name` }>{strMeal}</p>
               <img
                 data-testid={ `${index}-card-img` }
@@ -66,7 +66,7 @@ function Meals() {
             <Link to={ `${history.location.pathname}/${idMeal}` }>
               <div
                 data-testid={ `${index}-recipe-card` }
-                key={ idMeal }
+                key={ `${idMeal}-${index}` }
               >
                 <p data-testid={ `${index}-card-name` }>{strMeal}</p>
                 <img

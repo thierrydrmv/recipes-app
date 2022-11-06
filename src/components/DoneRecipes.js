@@ -7,13 +7,12 @@ function DoneRecipes() {
   const [copiado, setcopiado] = useState(false);
   const [filtro, setFiltro] = useState('All');
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  const Compartilhar = (tipo, id) => {
+  const compartilhar = (tipo, id) => {
     const url = `http://localhost:3000/${tipo}s/${id}`;
-    console.log(url);
     Copy(url);
     setcopiado(true);
   };
-
+  console.log(doneRecipes);
   return (
     <div>
       <h1 data-testid="page-title">
@@ -65,7 +64,6 @@ function DoneRecipes() {
             >
               Nome :
               { recipe.name }
-
             </p>
           </a>
           <p data-testid={ `${index}-horizontal-done-date` }>
@@ -73,19 +71,21 @@ function DoneRecipes() {
             {recipe.doneDate}
           </p>
           Tags:
-          {recipe.tags.map((tagName, idx) => (
-            <p
-              key={ idx }
-              data-testid={ `${index}-${tagName}-horizontal-tag` }
-            >
-              {tagName}
-            </p>
-          ))}
+          {
+            recipe.tags?.map((tag, i) => (
+              <p
+                key={ tag }
+                data-testid={ `${i}-${tag}-horizontal-tag` }
+              >
+                {tag}
+              </p>
+            ))
+          }
           <button
             type="button"
             data-testid={ `${index}-share-button` }
             onClick={ () => {
-              Compartilhar(recipe.type, recipe.id);
+              compartilhar(recipe.type, recipe.id);
             } }
           >
             <img

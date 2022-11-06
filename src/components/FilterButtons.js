@@ -48,8 +48,6 @@ function FilterButtons() {
     }
   };
 
-  console.log(categories);
-
   return (
     <div>
       {categories.map((categoryName, index) => (
