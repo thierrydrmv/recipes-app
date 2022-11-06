@@ -153,7 +153,7 @@ describe('Testa o componente "FavoriteRecipes"', () => {
     RenderWithProvider(<FavoriteRecipes />);
 
     const shareBtn = screen.getAllByAltText(/share/i);
-
+    const redirectButton = screen.getByTestId('profile-top-btn');
     await waitFor(() => {
       userEvent.click(shareBtn[0]);
     });
@@ -167,5 +167,6 @@ describe('Testa o componente "FavoriteRecipes"', () => {
     await waitFor(() => {
       expect(copied).toBeInTheDocument();
     });
+    userEvent.click(redirectButton.parentNode);
   });
 });
