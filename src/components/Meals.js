@@ -49,33 +49,37 @@ function Meals() {
       <FilterButtons />
       { meale ? meat.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
         index < size && (
-          <Link to={ `${history.location.pathname}/${idMeal}` }>
-            <div data-testid={ `${index}-recipe-card` } key={ `${idMeal}-${index}` }>
+          <div
+            data-testid={ `${index}-recipe-card` }
+            key={ `${idMeal}-${index}` }
+          >
+            <Link to={ `${history.location.pathname}/${idMeal}` }>
+
               <p data-testid={ `${index}-card-name` }>{strMeal}</p>
               <img
                 data-testid={ `${index}-card-img` }
                 src={ strMealThumb }
                 alt={ idMeal }
               />
-            </div>
-          </Link>
+            </Link>
+          </div>
         )
       )) : (
         meals.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
           index < size && (
-            <Link to={ `${history.location.pathname}/${idMeal}` }>
-              <div
-                data-testid={ `${index}-recipe-card` }
-                key={ `${idMeal}-${index}` }
-              >
+            <div
+              data-testid={ `${index}-recipe-card` }
+              key={ `${idMeal}-${index}` }
+            >
+              <Link to={ `${history.location.pathname}/${idMeal}` }>
                 <p data-testid={ `${index}-card-name` }>{strMeal}</p>
                 <img
                   data-testid={ `${index}-card-img` }
                   src={ strMealThumb }
                   alt={ idMeal }
                 />
-              </div>
-            </Link>
+              </Link>
+            </div>
           )
         )))}
       <Footer />
