@@ -2,6 +2,8 @@ import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipiesContext from '../context/RecipiesContext';
 import CarouselStructure from './CarouselStructure';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style/oneFoodCard.css';
 
 function OneFoodCard() {
   const { renderOneFood, setRenderOneFood } = useContext(RecipiesContext);
@@ -29,40 +31,51 @@ function OneFoodCard() {
   return (
     <div>
       {renderOneFood?.map(({
-        idMeal, strMealThumb, strMeal, strInstructions, strCategory, strYoutube,
+        idMeal, strMealThumb, strMeal, strInstructions, strYoutube,
         strTags, ingredientAndMeasureList,
       }) => (
         (
           <div key={ idMeal }>
-            <h1 data-testid="recipe-title">{strMeal}</h1>
+            <h1
+              className="recipeName"
+              data-testid="recipe-title"
+            >
+              {strMeal}
+            </h1>
             <img
+              className="oneFoodImg"
               data-testid="recipe-photo"
               src={ strMealThumb }
               name={ strTags }
               alt={ strMeal }
-              width="150"
             />
-            <p data-testid="recipe-category">{strCategory}</p>
-            {ingredientAndMeasureList.map(
-              ({ ingredient, measure }) => ingredient.map((i, index) => (
-                <div key={ `${index}-${i}` }>
-                  <p
-                    data-testid={ `${index}-ingredient-name-and-measure` }
+            <div className="text-center m-3">
+              <h5>Ingredients</h5>
+              {/* <p data-testid="recipe-category">{strCategory}</p> */}
+            </div>
+
+            <div className="ingredients-container">
+              {ingredientAndMeasureList.map(
+                ({ ingredient, measure }) => ingredient.map((i, index) => (
+                  <div
+                    key={ `${index}-${i}` }
                   >
-                    {i}
-                  </p>
-                  <p
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    {measure[index]}
-                  </p>
-                </div>
-              )),
-            )}
-            <p data-testid="instructions">{strInstructions}</p>
+                    <p
+                      className="ingredients"
+                      data-testid={ `${index}-ingredient-name-and-measure` }
+                    >
+                      {`${i} ${measure[index]}`}
+                    </p>
+                  </div>
+                )),
+              )}
+            </div>
+            <div className="m-3">
+              <p data-testid="instructions">{strInstructions}</p>
+            </div>
             <iframe
               data-testid="video"
-              width="560"
+              width="360"
               height="315"
               src={ `https://www.youtube.com/embed/_${strYoutube.split('_')}` }
               title="YouTube video player"
@@ -73,7 +86,10 @@ function OneFoodCard() {
               icture-in-picture"
               allowFullScreen
             />
-            <h2>Recomendações</h2>
+            <div className="text-center m-3">
+              <h5>Recommendations</h5>
+              {/* <p data-testid="recipe-category">{strCategory}</p> */}
+            </div>
             <CarouselStructure />
           </div>
         )

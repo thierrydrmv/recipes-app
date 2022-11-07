@@ -1,7 +1,7 @@
 .tela {
   align-items: center;
   background: rgb(43, 50, 68);
-  background-image: url('https://images.pexels.com/photos/10422319/pexels-photo-10422319.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  background-image: url('https://as2.ftcdn.net/v2/jpg/02/36/07/53/1000_F_236075373_18Jjkjx1fJyKUZg7goQzvCwHuCE8PdRH.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -12,10 +12,6 @@
   justify-content: center;
 }
 
-.imagem {
-  filter: blur(2px);
-  height: 100vh;
-}
 
 .meals {
   z-index: 2;
@@ -23,8 +19,9 @@
 
 .elementosLogin {
   align-items: center;
-  background-color: rgb(225, 226, 228);
+  background-color: #3c3d3f;
   border-radius: 10px;
+  color: white;
   display: flex;
   flex-direction: column;
   height: 140px;
@@ -33,18 +30,26 @@
 
 .email {
   all: unset;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
+  color: white;
 }
 
 .password {
   all: unset;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
+  color: white;
 }
 
 .button {
-  background-color: rgb(234, 30, 99);
+  background-color: #157347;
   border-radius: 10px;
+  color: white;
   width: 240px;
+}
+
+.icons {
+  all: unset;
+  margin: 10px;
 }
 
 
@@ -63,10 +68,19 @@
 */
 
 .footer {
+  background-color: white;
   bottom: 0;
+  display: flex;
+  justify-content: space-around;
   position: fixed;
+  width: 100%;
 }
 
 .ingredient-checkbox:checked + * {
   text-decoration: line-through solid black;
+}
+
+.tag {
+  display: flex;
+  flex-direction: column;
 }
