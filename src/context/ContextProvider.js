@@ -19,14 +19,13 @@ function ContextProvider({ children }) {
   const [drinke, setDrinke] = useState(false);
   const [meale, setMeale] = useState(false);
   const [drincat, setDrincat] = useState([]);
-  const [drincatBool, setDrincatBool] = useState(false);
   const [mealcat, setMealcat] = useState([]);
-  const [mealcatBool, setMealcatBool] = useState(false);
   const [idRecipeDetails, setIdRecipeDetails] = useState();
   const [renderOneFood, setRenderOneFood] = useState([]);
   const [cocktailApi, setCocktailApi] = useState([]);
   const [mealApi, setMealApi] = useState([]);
   const [checkBox, setCheckBox] = useState([]);
+  const [backupMeat, setBackupMeat] = useState([]);
 
   const contextValue = useMemo(() => (
     { email,
@@ -56,10 +55,6 @@ function ContextProvider({ children }) {
       drincat,
       setMealcat,
       mealcat,
-      drincatBool,
-      setDrincatBool,
-      mealcatBool,
-      setMealcatBool,
       idRecipeDetails,
       setIdRecipeDetails,
       renderOneFood,
@@ -75,6 +70,8 @@ function ContextProvider({ children }) {
       setMealsEmpty,
       checkBox,
       setCheckBox,
+      backupMeat,
+      setBackupMeat,
     }), [email,
     pageTitle,
     switchSearch,
@@ -86,8 +83,8 @@ function ContextProvider({ children }) {
     loading,
     meat,
     idRecipeDetails, renderOneFood, mealApi, cocktailApi,
-    drinke, meale, drincat, mealcat, drincatBool, mealcatBool,
-    waitApi, mealsEmpty, checkBox]);
+    drinke, meale, drincat, mealcat,
+    waitApi, mealsEmpty, checkBox, backupMeat]);
 
   return (
     <RecipiesContext.Provider value={ contextValue }>

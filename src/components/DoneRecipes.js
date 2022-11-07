@@ -80,27 +80,24 @@ function DoneRecipes() {
               />
             </a>
             <section className="card-container">
-              <div>
-                <div className="nameToCategory">
-                  <a href={ `/${recipe.type}s/${recipe.id}` }>
-                    <p
-                      data-testid={ `${index}-horizontal-name` }
-                    >
-                      { recipe.name }
-                    </p>
-                  </a>
-                  <p data-testid={ `${index}-horizontal-top-text` }>
-                    { `${recipe.nationality} - ${recipe.category}`}
-                    {recipe.alcoholicOrNot}
+              <div className="nameToCategory">
+                <a href={ `/${recipe.type}s/${recipe.id}` }>
+                  <p
+                    data-testid={ `${index}-horizontal-name` }
+                  >
+                    { recipe.name }
                   </p>
-                </div>
-                <div className="d-flex">
-                  <p data-testid={ `${index}-horizontal-done-date` }>
-                    Data :
-                    {recipe.doneDate}
-                  </p>
-
-                </div>
+                </a>
+                <p data-testid={ `${index}-horizontal-top-text` }>
+                  { `${recipe.nationality} - ${recipe.category}`}
+                  {recipe.alcoholicOrNot}
+                </p>
+              </div>
+              <div className="d-flex">
+                <p data-testid={ `${index}-horizontal-done-date` }>
+                  Data :
+                  {recipe.doneDate}
+                </p>
               </div>
               <br />
               <div className="icons text-center">

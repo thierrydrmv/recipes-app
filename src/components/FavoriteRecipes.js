@@ -48,8 +48,8 @@ function FavoriteRecipes() {
     copy(recipeUrl);
     setId(target.id);
   };
-
   const history = useHistory();
+
   const handleClick = (pathName) => {
     history.push(`/${pathName}`);
   };
