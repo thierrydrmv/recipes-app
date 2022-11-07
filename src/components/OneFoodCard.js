@@ -31,7 +31,7 @@ function OneFoodCard() {
     <div>
       {renderOneFood?.map(({
         idMeal, strMealThumb, strMeal, strInstructions, strYoutube,
-        strTags, ingredientAndMeasureList,
+        strTags, ingredientAndMeasureList, strCategory,
       }) => (
         (
           <div key={ idMeal }>
@@ -48,6 +48,8 @@ function OneFoodCard() {
               name={ strTags }
               alt={ strMeal }
             />
+            <p data-testid="recipe-category">{strCategory}</p>
+
             <div className="text-center m-3">
               <h5>Ingredients</h5>
             </div>

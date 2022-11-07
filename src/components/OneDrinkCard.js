@@ -7,10 +7,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function OneDrinkCard() {
   const { renderOneFood, setRenderOneFood } = useContext(RecipiesContext);
   const history = useHistory();
-  const vinteEUm = 17;
-  const trintaECinco = 21;
-  const trintaESeis = 32;
-  const cinquentaEUm = 36;
+  const vinte = 20;
+  const trintaEDois = 32;
+  const trintaECinco = 35;
+  const cinquentaEUm = 51;
   useEffect(() => {
     const fetchApiCocktail = async () => {
       const id = history.location.pathname.split('/')[2];
@@ -20,8 +20,12 @@ function OneDrinkCard() {
       const result = [...data.drinks];
       result[0].type = 'drinks';
       result[0].ingredientAndMeasureList = [{
-        ingredient: Object.values(result[0]).slice(vinteEUm, trintaECinco),
-        measure: Object.values(result[0]).slice(trintaESeis, cinquentaEUm),
+        ingredient: Object.values(result[0]).filter(
+          (item, index) => index > vinte && index < trintaEDois && item !== null,
+        ),
+        measure: Object.values(result[0]).filter(
+          (item, index) => index > trintaECinco && index < cinquentaEUm && item !== null,
+        ),
       }];
       setRenderOneFood(result);
     };
@@ -31,7 +35,7 @@ function OneDrinkCard() {
     <div>
       {renderOneFood?.map(({
         idDrink, strDrinkThumb, strDrink, strInstructions,
-        ingredientAndMeasureList,
+        ingredientAndMeasureList, strAlcoholic,
       }) => (
         (
           <div key={ idDrink }>
@@ -44,8 +48,8 @@ function OneDrinkCard() {
               width="150"
             />
             <div className="text-center m-3">
+              <p data-testid="recipe-category">{strAlcoholic}</p>
               <h5>Ingredients</h5>
-              {/* <p data-testid="recipe-category">{strAlcoholic}</p> */}
             </div>
             <div className="ingredients-container">
               {ingredientAndMeasureList.map(
