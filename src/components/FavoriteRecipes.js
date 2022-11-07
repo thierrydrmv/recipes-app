@@ -154,12 +154,6 @@ function FavoriteRecipes() {
                   onClick={ removeFavorite }
                 />
                 { id === element.id && <p data-testid="link-copied">Link copied!</p>}
-                {/* <button
-                type="button"
-                data-testid={`${index}-horizontal-favorite-btn`}
-              >
-                <img src={ blackHeartIcon } alt="" />
-              </button> */}
               </div>
             </section>
           </div>

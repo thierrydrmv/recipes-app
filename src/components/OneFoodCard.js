@@ -51,7 +51,6 @@ function OneFoodCard() {
             />
             <div className="text-center m-3">
               <h5>Ingredients</h5>
-              {/* <p data-testid="recipe-category">{strCategory}</p> */}
             </div>
 
             <div className="ingredients-container">
@@ -88,7 +87,6 @@ function OneFoodCard() {
             />
             <div className="text-center m-3">
               <h5>Recommendations</h5>
-              {/* <p data-testid="recipe-category">{strCategory}</p> */}
             </div>
             <CarouselStructure />
           </div>
