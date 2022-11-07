@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import RecipiesContext from '../context/RecipiesContext';
 import CarouselStructure from './CarouselStructure';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../style/oneFoodCard.css';
 
 function OneDrinkCard() {
   const { renderOneFood, setRenderOneFood } = useContext(RecipiesContext);

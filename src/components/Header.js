@@ -1,11 +1,10 @@
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipiesContext from '../context/RecipiesContext';
-import profileIcon from '../images/user-svgrepo-com.svg';
+import profileIcon from '../images/profileIcon.svg';
 import SearchBar from './SearchBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../style/header.css';
-import SearchIcon from '../images/books-search-svgrepo-com.svg';
+import searchIcon from '../images/searchIcon.svg';
 
 function Header() {
   const { pageTitle, switchSearch, setSwitchSearch } = useContext(RecipiesContext);
@@ -35,10 +34,10 @@ function Header() {
           type="button"
           onClick={ handleSearch }
         >
-          <img src={ SearchIcon } data-testid="search-top-btn" alt="btn-search" />
+          <img src={ searchIcon } data-testid="search-top-btn" alt="btn-search" />
         </button>
         {
-          switchSearch === true
+          switchSearch
           && <SearchBar />
         }
       </div>

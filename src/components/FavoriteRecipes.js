@@ -6,7 +6,6 @@ import profileIcon from '../images/profileIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../style/favoriteRecipes.css';
 
 function FavoriteRecipes() {
   const [favoriteToShow, setFavoriteToShow] = useState([]);
