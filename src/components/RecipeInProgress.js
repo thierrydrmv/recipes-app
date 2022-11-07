@@ -130,8 +130,8 @@ export default function RecipeInProgress() {
             strMealThumb, strInstructions, strCategory }, i) => (
             (
               <div key={ `${strMeal}${i}` }>
-                <ShareAndFavoriteButtons />
                 <h3 data-testid="recipe-title">{strMeal}</h3>
+                <ShareAndFavoriteButtons />
                 <img
                   data-testid="recipe-photo"
                   src={ strMealThumb }
@@ -166,11 +166,11 @@ export default function RecipeInProgress() {
             )))
         ) : (
           [renderOneFood]?.map(({ strInstructions, strDrink,
-            strDrinkThumb, strAlcoholic }) => (
+            strDrinkThumb, strAlcoholic }, i) => (
             (
-              <div key={ strDrink }>
-                <ShareAndFavoriteButtons />
+              <div key={ `${strDrink}${i}` }>
                 <h3 data-testid="recipe-title">{strDrink}</h3>
+                <ShareAndFavoriteButtons />
                 <img
                   data-testid="recipe-photo"
                   src={ strDrinkThumb }

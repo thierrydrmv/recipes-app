@@ -12,7 +12,6 @@ function DoneRecipes() {
     Copy(url);
     setcopiado(true);
   };
-  console.log(doneRecipes);
   return (
     <div>
       <h1 data-testid="page-title">
@@ -72,10 +71,10 @@ function DoneRecipes() {
           </p>
           Tags:
           {
-            recipe.tags?.map((tag, i) => (
+            recipe.tags?.map((tag) => (
               <p
                 key={ tag }
-                data-testid={ `${i}-${tag}-horizontal-tag` }
+                data-testid={ `${index}-${tag}-horizontal-tag` }
               >
                 {tag}
               </p>

@@ -9,7 +9,6 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function RecipeDetails() {
-  const [inProgress, setInProgress] = useState(false);
   const [linkCopiado, setLinkCopiado] = useState(false);
   const [favoriteIcon, setFavoriteIcon] = useState(false);
   const history = useHistory();
@@ -30,18 +29,6 @@ function RecipeDetails() {
       );
     }
   });
-
-  useEffect(() => {
-    const id = history.location.pathname.split('/')[2];
-    const route = history.location.pathname.split('/')[1];
-    if (renderOneFood?.length) {
-      const list = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      const inProgressNow = [...Object.entries(list[route])];
-      if (inProgressNow[0].includes(id)) {
-        setInProgress(true);
-      }
-    }
-  }, [inProgress]);
 
   const handleButton = () => {
     history.push(`${history.location.pathname}/in-progress`);

@@ -48,30 +48,30 @@ function Drinks() {
       <FilterButtons />
       {drinke ? meat.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
         index < size && (
-          <Link to={ `${history.location.pathname}/${idDrink}` }>
-            <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
+          <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
+            <Link to={ `${history.location.pathname}/${idDrink}` }>
               <p data-testid={ `${index}-card-name` }>{strDrink}</p>
               <img
                 data-testid={ `${index}-card-img` }
                 src={ strDrinkThumb }
                 alt={ idDrink }
               />
-            </div>
-          </Link>
+            </Link>
+          </div>
         )
       )) : (
         meals.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
           index < size && (
-            <Link to={ `${history.location.pathname}/${idDrink}` }>
-              <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
+            <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
+              <Link to={ `${history.location.pathname}/${idDrink}` }>
                 <p data-testid={ `${index}-card-name` }>{strDrink}</p>
                 <img
                   data-testid={ `${index}-card-img` }
                   src={ strDrinkThumb }
                   alt={ idDrink }
                 />
-              </div>
-            </Link>
+              </Link>
+            </div>
           )
         )))}
       <Footer />
