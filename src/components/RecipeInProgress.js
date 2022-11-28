@@ -121,6 +121,11 @@ export default function RecipeInProgress() {
       );
     }
   };
+  const handleCSS = (checked) => {
+    if (checked) {
+      return { textDecoration: 'line-through solid rgb(0,0,0)' };
+    }
+  };
 
   return (
     <section>
@@ -131,7 +136,10 @@ export default function RecipeInProgress() {
             (
               <div key={ `${strMeal}${i}` }>
                 <h3 data-testid="recipe-title">{strMeal}</h3>
-                <ShareAndFavoriteButtons />
+                {
+                  strMeal
+                && <ShareAndFavoriteButtons />
+                }
                 <img
                   data-testid="recipe-photo"
                   src={ strMealThumb }
@@ -142,10 +150,10 @@ export default function RecipeInProgress() {
                     key={ `${element}-${index}` }
                     htmlFor="ingredients"
                     data-testid={ `${index}-ingredient-step` }
+                    style={ handleCSS(checkBox[index]) }
                   >
                     <input
                       onChange={ () => handleCheckBox(index) }
-                      className="ingredient-checkbox"
                       checked={ checkBox[index] }
                       type="checkbox"
                     />
@@ -170,26 +178,29 @@ export default function RecipeInProgress() {
             (
               <div key={ `${strDrink}${i}` }>
                 <h3 data-testid="recipe-title">{strDrink}</h3>
-                <ShareAndFavoriteButtons />
+                {
+                  strDrink
+                && <ShareAndFavoriteButtons />
+                }
                 <img
                   data-testid="recipe-photo"
                   src={ strDrinkThumb }
                   alt={ strDrinkThumb }
                 />
                 {ingredientsList?.map((element, index) => (
-                  <div className="text-dark" key={ `${element}-${index}` }>
-                    <label
-                      htmlFor="ingredient"
-                      data-testid={ `${index}-ingredient-step` }
-                    >
-                      <input
-                        onChange={ () => handleCheckBox(index) }
-                        checked={ checkBox[index] }
-                        type="checkbox"
-                      />
-                      <p>{element}</p>
-                    </label>
-                  </div>
+                  <label
+                    key={ `${element}-${index}` }
+                    htmlFor="ingredient"
+                    data-testid={ `${index}-ingredient-step` }
+                    style={ handleCSS(checkBox[index]) }
+                  >
+                    <input
+                      onChange={ () => handleCheckBox(index) }
+                      checked={ checkBox[index] }
+                      type="checkbox"
+                    />
+                    <p>{element}</p>
+                  </label>
                 ))}
                 <h4 data-testid="recipe-category">{strAlcoholic}</h4>
                 <p data-testid="instructions">{strInstructions}</p>

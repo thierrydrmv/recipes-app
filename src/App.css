@@ -76,9 +76,9 @@
   width: 100%;
 }
 
-.ingredient-checkbox:checked + * {
+/* .ingredient-checkbox:checked + * {
   text-decoration: line-through solid black;
-}
+} */
 
 .tag {
   display: flex;
