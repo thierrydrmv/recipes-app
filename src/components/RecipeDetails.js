@@ -37,9 +37,7 @@ function RecipeDetails() {
     if (renderOneFood?.length) {
       const list = JSON.parse(localStorage.getItem('inProgressRecipes'));
       const inProgressNow = [...Object.entries(list[route])];
-      if (inProgressNow[0].includes(id)) {
-        setInProgress(true);
-      }
+      if (inProgressNow[0].includes(id)) setInProgress(true);
     }
   }, [inProgress]);
 

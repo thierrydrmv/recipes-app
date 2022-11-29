@@ -11,7 +11,7 @@ const LIST_DRINKS = '[lista - de - ingredientes - utilizados - drinks]';
 const LIST_MEALS = '[lista - de - ingredientes - utilizados - meals]';
 
 describe('testa a tela recipeDetails', () => {
-  beforeEach(() => {
+  it('testa o componente oneFoodCard', async () => {
     global.localStorage.setItem('inProgressRecipes', JSON.stringify({
       drinks: {
         178319: LIST_DRINKS,
@@ -19,8 +19,6 @@ describe('testa a tela recipeDetails', () => {
       meals: {
         52771: LIST_MEALS,
       } }));
-  });
-  it('testa o componente oneFoodCard', async () => {
     global.fetch = jest.fn(() => Promise.resolve({
       json: () => Promise.resolve(oneMeal),
     }));
@@ -43,6 +41,13 @@ describe('testa a tela recipeDetails', () => {
     global.fetch = jest.fn(() => Promise.resolve({
       json: () => Promise.resolve(oneDrink),
     }));
+    global.localStorage.setItem('inProgressRecipes', JSON.stringify({
+      drinks: {
+        178319: LIST_DRINKS,
+      },
+      meals: {
+        52771: LIST_MEALS,
+      } }));
     const localStorage = JSON.parse(global.localStorage.getItem('inProgressRecipes'));
     expect(localStorage).toEqual({
       drinks: {
@@ -61,5 +66,24 @@ describe('testa a tela recipeDetails', () => {
     userEvent.click(favoriteBtn);
     expect(favoriteBtn).toHaveAttribute('src', 'blackHeartIcon.svg');
     userEvent.click(btnFixedBottom);
+  });
+  it('testa o componente oneDrinkcard', async () => {
+    global.fetch = jest.fn()
+      .mockResolvedValue({
+        json: jest.fn().mockResolvedValue(oneDrink),
+      });
+    global.localStorage.setItem('inProgressRecipes', JSON.stringify({
+      drinks: {
+        15997: LIST_DRINKS,
+      },
+      meals: {
+        52771: LIST_MEALS,
+      } }));
+    await act(async () => {
+      RenderWithProvider(<RecipeDetails />, '/drinks/178319');
+    });
+    // const btnFixedBottom = screen.getByRole('button', { name: /Start Recipe/i });
+    // expect(btnFixedBottom).toBeInTheDocument();
+    // userEvent.click(btnFixedBottom);
   });
 });
