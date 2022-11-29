@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
 import './App.css';
 import Meals from './components/Meals';
@@ -12,7 +12,7 @@ import RecipeInProgress from './components/RecipeInProgress';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Switch>
       <Route exact path="/" component={ Login } />
       <Route exact path="/meals" component={ Meals } />
       <Route exact path="/drinks" component={ Drinks } />
@@ -37,7 +37,7 @@ function App() {
       <Route path="/profile" component={ Profile } />
       <Route path="/done-recipes" component={ DoneRecipes } />
       <Route path="/favorite-recipes" component={ FavoriteRecipes } />
-    </BrowserRouter>
+    </Switch>
   );
 }
 

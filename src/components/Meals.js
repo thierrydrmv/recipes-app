@@ -40,7 +40,6 @@ function Meals() {
       setRedirect('');
     }
   }, [history, redirect, setPageTitle, setRoute, setMeale]);
-
   const size = 12;
 
   return (
@@ -49,12 +48,8 @@ function Meals() {
       <FilterButtons />
       { meale ? meat.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
         index < size && (
-          <div
-            data-testid={ `${index}-recipe-card` }
-            key={ `${idMeal}-${index}` }
-          >
+          <div data-testid={ `${index}-recipe-card` } key={ idMeal }>
             <Link to={ `${history.location.pathname}/${idMeal}` }>
-
               <p data-testid={ `${index}-card-name` }>{strMeal}</p>
               <img
                 data-testid={ `${index}-card-img` }
@@ -67,10 +62,7 @@ function Meals() {
       )) : (
         meals.meals?.map(({ idMeal, strMealThumb, strMeal }, index) => (
           index < size && (
-            <div
-              data-testid={ `${index}-recipe-card` }
-              key={ `${idMeal}-${index}` }
-            >
+            <div data-testid={ `${index}-recipe-card` } key={ idMeal }>
               <Link to={ `${history.location.pathname}/${idMeal}` }>
                 <p data-testid={ `${index}-card-name` }>{strMeal}</p>
                 <img

@@ -13,10 +13,10 @@ function Drinks() {
     redirect,
     meals,
     setMeat,
+    setDrinke,
     meat,
     drinke,
     setRedirect,
-    setDrinke,
     setBackupMeat,
   } = useContext(RecipiesContext);
   const history = useHistory();
@@ -46,7 +46,7 @@ function Drinks() {
     <div>
       <Header />
       <FilterButtons />
-      {drinke ? meat.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+      { drinke ? meat.drinks?.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
         index < size && (
           <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
             <Link to={ `${history.location.pathname}/${idDrink}` }>

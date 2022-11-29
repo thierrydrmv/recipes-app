@@ -22,7 +22,6 @@ function FilterButtons() {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
       const data = await response.json();
       const newData = data.meals.filter((_item, index) => (index < five));
-      console.log(newData);
       const allCategories = newData
         .map((item) => (item.strCategory));
       setCategories(['All', ...allCategories]);
