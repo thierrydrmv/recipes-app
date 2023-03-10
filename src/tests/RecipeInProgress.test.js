@@ -8,6 +8,7 @@ const oneMeal = require('../../cypress/mocks/oneMeal');
 
 describe('testando a página receita em progresso', () => {
   it('renderiza os ingredientes do meals', async () => {
+    global.navigator.clipboard = { writeText: jest.fn() };
     global.fetch = jest.fn()
       .mockResolvedValue({
         json: jest.fn().mockResolvedValue(oneMeal),
